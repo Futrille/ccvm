@@ -28,6 +28,7 @@
 
     <!-- REFACTORIZAR -->
     <link href="resources/jquery.loader.css" rel="stylesheet">
+    <link href="resources/responsive-tables.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -110,7 +111,7 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="javascript:loadModule('general','generalIndex');">Consultar</a>
+                                    <a href="javascript:loadModule('general','valorVariableIndex');">Valores Variables</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -142,8 +143,11 @@
     <!-- Custom Theme JavaScript -->
     <script src="resources/themes/sb-admin-2-1.0.8/dist/js/sb-admin-2.js"></script>
 
+    <!--REFACTORIZAR-->
     <script src="resources/jquery.loader.js"></script>
+    <script src="resources/jquery.responsive-tables.js"></script>
 
+    <script src="resources/js/jquery/utils.js"></script>
     <script src="resources/js/jquery/routes.js"></script>
     <!--<script src="resources/js/jquery/comunicacion.js"></script>-->
     <script src="resources/js/jquery/app.js"></script>
@@ -151,6 +155,9 @@
     <!-- DataTables JavaScript -->
     <script src="resources/themes/sb-admin-2-1.0.8/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="resources/themes/sb-admin-2-1.0.8/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<script>
+    $.responsiveTables();
 
+</script>
 </body>
 </html>
