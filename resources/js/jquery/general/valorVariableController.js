@@ -1,6 +1,10 @@
 (function() {
     'use strict';
 
+    var tablaActual = $('#table-example').DataTable({
+        responsive: true
+    });
+
     getList(ROUTE.MODULES.GENERAL)
         .done(function(data) {
             console.log(data);

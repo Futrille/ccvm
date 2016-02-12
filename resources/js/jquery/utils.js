@@ -8,17 +8,40 @@ $.ajaxSetup({
 });
 
 /**
+ * Carga Script dinamicamente y los almacena temporalmente en cache
+ * @param url
+ * @param options
+ * @returns {*}
+ */
+jQuery.cachedScript = function( url, options ) {
+
+    // Allow user to set any option except for dataType, cache, and url
+    options = $.extend( options || {}, {
+        dataType: "script",
+        cache: true,
+        url: url
+    });
+
+    // Use $.ajax() since it is more flexible than $.getScript
+    // Return the jqXHR object so we can chain callbacks
+    return jQuery.ajax( options );
+};
+
+/**
  * Carga modulos html en el pag-wrapper
  * @param modulo
  * @param accion
  */
-function loadModule(modulo,accion){
+function loadModule(modulo, vista, accion){
     $.loader({
         className:"blue-with-image-2",
         content:''
     });
-    $("#page-wrapper").load("views/" + modulo + "/" + accion + ".html", function(response, status, xhr){
-        //console.log(status, xhr);
+    $("#page-wrapper").load("views/" + modulo + "/" + vista + accion + ".html", function(response, status, xhr){
+        $.cachedScript( "resources/js/jquery/" + modulo + "/" + vista + "Controller.js" ).done(function( script, textStatus ) {
+
+        });
+
         $.loader('close');
     });
 };
@@ -44,22 +67,3 @@ function getList(url){
     );
 };
 
-/**
- * Carga Script dinamicamente y los almacena temporalmente en cache
- * @param url
- * @param options
- * @returns {*}
- */
-jQuery.cachedScript = function( url, options ) {
-
-    // Allow user to set any option except for dataType, cache, and url
-    options = $.extend( options || {}, {
-        dataType: "script",
-        cache: true,
-        url: url
-    });
-
-    // Use $.ajax() since it is more flexible than $.getScript
-    // Return the jqXHR object so we can chain callbacks
-    return jQuery.ajax( options );
-};
