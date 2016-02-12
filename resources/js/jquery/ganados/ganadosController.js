@@ -4,14 +4,15 @@
 
 
     getGanados().done(function(data) {
+        console.log(data);
         $.each(data, function(i, item) {
             tablaActual.row.add( [
-                item.id,
-                item.codigo,
-                item.nombre,
-                item.valor,
-                item.orden,
-                item.descripcion,
+                item.cedula,
+                item.nombres,
+                item.apellidos,
+                item.sexo,
+                item.nacionalidad,
+                item.iglesia.nombre,
             ] ).draw( false );
         });
     })
