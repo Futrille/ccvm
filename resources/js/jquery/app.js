@@ -1,6 +1,6 @@
 
 
-loadModule('monitor','dashboard');
+//loadModule('monitor','dashboard');
 
 function loadModule(modulo,accion){
     $.loader({

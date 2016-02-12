@@ -17,7 +17,7 @@
     <!-- Custom CSS -->
     <link href="resources/themes/sb-admin-2-1.0.8/dist/css/sb-admin-2.css" rel="stylesheet">
     <!-- Morris Charts CSS -->
-    <link href="resources/themes/sb-admin-2-1.0.8/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!--<link href="resources/themes/sb-admin-2-1.0.8/bower_components/morrisjs/morris.css" rel="stylesheet">-->
     <!-- Custom Fonts -->
     <link href="resources/themes/sb-admin-2-1.0.8/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -91,15 +91,26 @@
                             <a href="javascript:loadModule('monitor','dashboard');"><i class="fa fa-dashboard fa-fw"></i> Monitor</a>
                         </li>
                         <li>
-                            <a href="javascript:loadModule('ganados','consultar');">
+                            <a href="#">
                                 <i class="fa fa-bar-chart-o fa-fw"></i> Ganados<span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="javascript:loadModule('ganados','consultar');">Consultar</a>
+                                    <a href="javascript:loadModule('ganados','ganadosIndex');">Consultar</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:loadModule('ganados','registrar');">Registrar</a>
+                                    <a href="javascript:loadModule('ganados','ganadosRegistrar');">Registrar</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-bar-chart-o fa-fw"></i> General<span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="javascript:loadModule('general','generalIndex');">Consultar</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -125,9 +136,9 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="resources/themes/sb-admin-2-1.0.8/bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <!-- Morris Charts JavaScript -->
-    <script src="resources/themes/sb-admin-2-1.0.8/bower_components/raphael/raphael-min.js"></script>
-    <script src="resources/themes/sb-admin-2-1.0.8/bower_components/morrisjs/morris.min.js"></script>
-    <script src="resources/themes/sb-admin-2-1.0.8/js/morris-data.js"></script>
+    <!--<script src="resources/themes/sb-admin-2-1.0.8/bower_components/raphael/raphael-min.js"></script>-->
+    <!--<script src="resources/themes/sb-admin-2-1.0.8/bower_components/morrisjs/morris.min.js"></script>-->
+    <!--<script src="resources/themes/sb-admin-2-1.0.8/js/morris-data.js"></script>-->
     <!-- Custom Theme JavaScript -->
     <script src="resources/themes/sb-admin-2-1.0.8/dist/js/sb-admin-2.js"></script>
 

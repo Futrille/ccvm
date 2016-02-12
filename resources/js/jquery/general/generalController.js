@@ -1,19 +1,17 @@
 (function() {
     'use strict';
 
-
-
-    getList(ROUTE.MODULES.GANADOS)
+    getList(ROUTE.MODULES.GENERAL)
         .done(function(data) {
             console.log(data);
             $.each(data, function(i, item) {
                 tablaActual.row.add( [
-                    item.cedula,
-                    item.nombres,
-                    item.apellidos,
-                    item.sexo,
-                    item.nacionalidad,
-                    item.iglesia.nombre,
+                    item.id,
+                    item.codigo,
+                    item.valor,
+                    item.nombre,
+                    item.orden,
+                    item.descripcion,
                 ] ).draw( false );
             });
         })

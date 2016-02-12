@@ -8,5 +8,6 @@ var ROUTE = {
     //LOCAL:       '..' + this.BASE + this.APP_ENV,
     MODULES:    {
         GANADOS: '/iglesys/web/app_dev.php/ganados',
+        GENERAL: '/iglesys/web/app_dev.php/general/valorvariable',
     },
 };
