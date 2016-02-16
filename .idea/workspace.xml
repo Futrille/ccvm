@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="140bc27f-969f-48ed-b1f9-72be1f236594" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/jquery/routes.js" afterPath="$PROJECT_DIR$/resources/js/jquery/routes.js" />
-    </list>
+    <list default="true" id="140bc27f-969f-48ed-b1f9-72be1f236594" name="Default" comment="" />
     <ignored path="efi.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
