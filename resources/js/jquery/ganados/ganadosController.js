@@ -14,6 +14,8 @@
                     item.sexo,
                     item.nacionalidad,
                     item.iglesia.nombre,
+                    item.idEstatus.nombre,
+                    item.idEsCompleto.nombre,
                 ] ).draw( false );
             });
         })

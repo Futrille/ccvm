@@ -22,17 +22,21 @@
                                 <th>SEXO</th>
                                 <th>NACIONALIDAD</th>
                                 <th>IGLESIA</th>
+                                <th>ESTATUS</th>
+                                <th>COMPLETO</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                         <tfoot>
                             <tr>
-                                <th>ID</th>
-                                <th>CODIGO</th>
-                                <th>NOMBRE</th>
-                                <th>VALOR</th>
-                                <th>ORDEN</th>
-                                <th>DESCRIPCI&Oacute;N</th>
+                                <th>C&eacute;DULA</th>
+                                <th>NOMBRES</th>
+                                <th>APELLIDOS</th>
+                                <th>SEXO</th>
+                                <th>NACIONALIDAD</th>
+                                <th>IGLESIA</th>
+                                <th>ESTATUS</th>
+                                <th>COMPLETO</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -48,16 +52,11 @@
     </div>
 </div>
 <script>
-    $.ajaxSetup({
-        cache: true
-    });
+//    $.ajaxSetup({
+//        cache: true
+//    });
     var tablaActual = $('#table-example').DataTable({
         responsive: true
     });
 
-    $.cachedScript( "resources/js/jquery/ganados/ganadosController.js" ).done(function( script, textStatus ) {
-//        if (textStatus == 'success') {
-//            //$.cachedScript( "resources/js/jquery/ganados/ganadosController.js");
-//        }
-    });
 </script>

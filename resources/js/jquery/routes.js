@@ -7,7 +7,7 @@ var ROUTE = {
     //PUBLIC:     this.PROTOCOL + this.SERVER + this.BASE + this.APP_ENV,
     //LOCAL:       '..' + this.BASE + this.APP_ENV,
     MODULES:    {
-        GANADOS: '/iglesys/web/app_dev.php/ganados',
-        GENERAL: '/iglesys/web/app_dev.php/general/valorvariable',
+        GANADOS: '/efi-core/web/app_dev.php/persona/',
+        GENERAL: '/efi-core/web/general/valorvariable',
     },
 };

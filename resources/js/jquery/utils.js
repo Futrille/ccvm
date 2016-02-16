@@ -3,9 +3,9 @@
 /**
  * Consiguración para guardar cache de las llamadas asincronas
  */
-$.ajaxSetup({
-    cache: true
-});
+//$.ajaxSetup({
+//    cache: true
+//});
 
 /**
  * Carga Script dinamicamente y los almacena temporalmente en cache
@@ -37,14 +37,32 @@ function loadModule(modulo, vista, accion){
         className:"blue-with-image-2",
         content:''
     });
-    $("#page-wrapper").load("views/" + modulo + "/" + vista + accion + ".html", function(response, status, xhr){
-        $.cachedScript( "resources/js/jquery/" + modulo + "/" + vista + "Controller.js" ).done(function( script, textStatus ) {
+    if (accion != 'Registrar') {
+        $("#page-wrapper").load("views/" + modulo + "/" + vista + accion + ".html", function (response, status, xhr) {
+            $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + "Controller.js").done(function (script, textStatus) {
 
+            });
+
+            $.loader('close');
         });
+    }
+    else{
+        $("#page-wrapper").load("/efi-core/web/app_dev.php/persona/new", function (response, status, xhr) {
 
-        $.loader('close');
-    });
-};
+
+            $.loader('close');
+        });
+        //return $.get(
+        //    url,
+        //    {
+        //        apiKey:'77fa53ff60e8f41e40260b0dad826d76',
+        //        "_": $.now()
+        //    },
+        //    null,
+        //    'json'
+        //);
+    }
+}
 
 /**
  * Consulta lista de datos desde el backend
@@ -65,5 +83,5 @@ function getList(url){
         null,
         'json'
     );
-};
+}
 
