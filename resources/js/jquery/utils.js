@@ -51,6 +51,41 @@ function loadModule(modulo, vista, accion){
 
 
             $.loader('close');
+
+            $("form[name=persona]").submit(function(e) {
+                e.preventDefault();
+                alert("mensaje");
+
+
+                var jqxhr = $.post( "example.php", $('form[name=persona]').serialize(), function(data) {
+                    console.log("success");
+                    console.log(data);
+                })
+                    .done(function() {
+                        console.log( "second success" );
+                    })
+                    .fail(function() {
+                        console.log( "error" );
+                    })
+                    .always(function() {
+                        console.log( "finished" );
+                    });
+                //var email = $('.email').val();
+                //alert(email);
+                //var DATA = 'email=' + email;
+                //alert(DATA);
+                //var url = $("#form_newsletter").attr("action");
+                //$.ajax({
+                //    type: "POST",
+                //    url: url,
+                //    data: DATA,
+                //    cache: false,
+                //    success: function(data) {
+                //        console.log(data);
+                //    }
+                //});
+
+            });
         });
         //return $.get(
         //    url,
