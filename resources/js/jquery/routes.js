@@ -8,6 +8,6 @@ var ROUTE = {
     //LOCAL:       '..' + this.BASE + this.APP_ENV,
     MODULES:    {
         GANADOS: '/efi-core/web/app_dev.php/persona/',
-        GENERAL: '/efi-core/web/general/valorvariable',
+        GENERAL: '/efi-core/web/app_dev.php/general/valorvariable',
     },
 };
