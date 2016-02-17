@@ -30,6 +30,7 @@ jQuery.cachedScript = function( url, options ) {
 /**
  * Carga modulos html en el pag-wrapper
  * @param modulo
+ * @param vista
  * @param accion
  */
 function loadModule(modulo, vista, accion){
@@ -37,65 +38,28 @@ function loadModule(modulo, vista, accion){
         className:"blue-with-image-2",
         content:''
     });
-    if (accion != 'Registrar') {
-        $("#page-wrapper").load("views/" + modulo + "/" + vista + accion + ".html", function (response, status, xhr) {
-            $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + "Controller.js").done(function (script, textStatus) {
-
+    var wrapper = $("#page-wrapper");
+    switch (accion){
+        case 'Index':
+            wrapper.load("views/" + modulo + "/" + vista + accion + ".html", function (response, status, xhr) {
+                $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                    console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    $.loader('close');
+                });
             });
-
-            $.loader('close');
-        });
-    }
-    else{
-        $("#page-wrapper").load("/efi-core/web/app_dev.php/persona/new", function (response, status, xhr) {
-
-
-            $.loader('close');
-
-            $("form[name=persona]").submit(function(e) {
-                e.preventDefault();
-                alert("mensaje");
-
-
-                var jqxhr = $.post( "example.php", $('form[name=persona]').serialize(), function(data) {
-                    console.log("success");
-                    console.log(data);
-                })
-                    .done(function() {
-                        console.log( "second success" );
-                    })
-                    .fail(function() {
-                        console.log( "error" );
-                    })
-                    .always(function() {
-                        console.log( "finished" );
-                    });
-                //var email = $('.email').val();
-                //alert(email);
-                //var DATA = 'email=' + email;
-                //alert(DATA);
-                //var url = $("#form_newsletter").attr("action");
-                //$.ajax({
-                //    type: "POST",
-                //    url: url,
-                //    data: DATA,
-                //    cache: false,
-                //    success: function(data) {
-                //        console.log(data);
-                //    }
-                //});
-
+            break;
+        case 'Nuevo':
+            wrapper.load(ROUTE.MODULES.GANADOS_NEW, {
+                "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
+            }, function (response, status, xhr) {
+                $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                    console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    $.loader('close');
+                });
             });
-        });
-        //return $.get(
-        //    url,
-        //    {
-        //        apiKey:'77fa53ff60e8f41e40260b0dad826d76',
-        //        "_": $.now()
-        //    },
-        //    null,
-        //    'json'
-        //);
+            break;
+        default:
+
     }
 }
 

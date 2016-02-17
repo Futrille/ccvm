@@ -1,8 +1,8 @@
 (function() {
     'use strict';
-
-
-
+    var tablaActual = $('#table-example').DataTable({
+        responsive: true
+    });
     getList(ROUTE.MODULES.GANADOS)
         .done(function(data) {
             console.log(data);
