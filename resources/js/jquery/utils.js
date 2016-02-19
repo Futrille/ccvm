@@ -18,7 +18,7 @@ jQuery.cachedScript = function( url, options ) {
     // Allow user to set any option except for dataType, cache, and url
     options = $.extend( options || {}, {
         dataType: "script",
-        cache: true,
+        cache: false,
         url: url
     });
 
@@ -49,7 +49,7 @@ function loadModule(modulo, vista, accion, id){
             });
             break;
         case 'Nuevo':
-            wrapper.load(ROUTE.MODULES.GANADOS_NEW, {
+            wrapper.load(getRoute('persona_new'), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
             }, function (response, status, xhr) {
                 $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
@@ -59,12 +59,11 @@ function loadModule(modulo, vista, accion, id){
             });
             break;
         case 'Editar':
-            alert(id);
-            wrapper.load((ROUTE.MODULES.GANADOS_EDIT + id + '/edit'), {
+            //alert(app.idEntidad + 'rout: ' + getRoute('persona_edit', id));
+            wrapper.load(getRoute('persona_edit', id), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76",
                 //"id":id
             }, function (response, status, xhr) {
-                console.log("cargo.. bien...");
                 $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
                     $.loader('close');

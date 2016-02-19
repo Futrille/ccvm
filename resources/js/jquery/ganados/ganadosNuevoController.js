@@ -19,7 +19,7 @@
         e.preventDefault();
 
 
-        var jqxhr = $.post( ROUTE.MODULES.GANADOS_NEW , $('form[name=persona]').serialize(), function(data, status, xhr) {
+        var jqxhr = $.post( getRoute('persona_new') , $('form[name=persona]').serialize(), function(data, status, xhr) {
             console.log(data);
             if (data != null && data.status != null && data.status == "error"){
                 $("#notificaciones").html(
@@ -31,7 +31,8 @@
             }
             else {//if (data != null && data.status != null && data.status == "success"){
                 //console.log("retorno de guardar");
-                loadModule('ganados','ganados','Editar', data.response.id);
+                setIdEntidad(data.response.id);
+                loadModule('ganados','ganados','Editar');
                 //$("#notificaciones").html(
                 //    '<div class="col-lg-12"><div class="alert alert-success alert-dismissable">' +
                 //    '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +

@@ -102,10 +102,10 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="javascript:loadModule('ganados','ganados','Index',0);">Consultar</a>
+                                    <a href="javascript:loadModule('ganados','ganados','Index');">Consultar</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:loadModule('ganados','ganados','Nuevo',0);">Registrar</a>
+                                    <a href="javascript:loadModule('ganados','ganados','Nuevo');">Registrar</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -116,7 +116,7 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="javascript:loadModule('general','valorVariable','Index',0);">Valores Variables</a>
+                                    <a href="javascript:loadModule('general','valorVariable','Index');">Valores Variables</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -164,6 +164,14 @@
     <script src="resources/js/jquery/routes.js"></script>
     <!--<script src="resources/js/jquery/comunicacion.js"></script>-->
     <script src="resources/js/jquery/app.js"></script>
+<script>
+    $( document ).ready( function(){
+        $("h1").on('click', function(){
+            console.log("Mensajito" );//+ event.data.name);
+        });
+    } );
 
+
+</script>
 </body>
 </html>
