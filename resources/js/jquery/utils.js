@@ -33,7 +33,7 @@ jQuery.cachedScript = function( url, options ) {
  * @param vista
  * @param accion
  */
-function loadModule(modulo, vista, accion){
+function loadModule(modulo, vista, accion, id){
     $.loader({
         className:"blue-with-image-2",
         content:''
@@ -52,6 +52,19 @@ function loadModule(modulo, vista, accion){
             wrapper.load(ROUTE.MODULES.GANADOS_NEW, {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
             }, function (response, status, xhr) {
+                $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                    console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    $.loader('close');
+                });
+            });
+            break;
+        case 'Editar':
+            alert(id);
+            wrapper.load((ROUTE.MODULES.GANADOS_EDIT + id + '/edit'), {
+                "apiKey":"77fa53ff60e8f41e40260b0dad826d76",
+                //"id":id
+            }, function (response, status, xhr) {
+                console.log("cargo.. bien...");
                 $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
                     $.loader('close');
