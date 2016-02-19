@@ -30,7 +30,7 @@
                 );
             }
             else {//if (data != null && data.status != null && data.status == "success"){
-                alert("retorno de guardar");
+                //console.log("retorno de guardar");
                 loadModule('ganados','ganados','Editar', data.response.id);
                 //$("#notificaciones").html(
                 //    '<div class="col-lg-12"><div class="alert alert-success alert-dismissable">' +
