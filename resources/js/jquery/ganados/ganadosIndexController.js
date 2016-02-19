@@ -1,7 +1,10 @@
 (function() {
     'use strict';
     var tablaActual = $('#table-example').DataTable({
-        responsive: true
+        responsive: true,
+        "language": {
+            "url": "dataTables.spanish.lang"
+        }
     });
     getList(ROUTE.MODULES.GANADOS)
         .done(function(data) {

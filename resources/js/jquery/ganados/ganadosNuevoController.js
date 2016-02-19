@@ -1,19 +1,19 @@
 (function() {
     'use strict';
 
-    $('#sandbox-container .input-group.date').datepicker({
-        format: "dd/mm/yyyy",
-        startDate: "01/01/1940",
-        endDate: "10/02/2016",
-        startView: 2,
-        todayBtn: "linked",
-        language: "es",
-        autoclose: true,
-        todayHighlight: true,
-        datesDisabled: ['02/06/2016', '02/21/2016'],
-        toggleActive: true,
-        //defaultViewDate: { year: 1977, month: 04, day: 25 },
-    });
+    //$('#sandbox-container .input-group.date').datepicker({
+    //    format: "dd/mm/yyyy",
+    //    startDate: "01/01/1940",
+    //    endDate: "10/02/2016",
+    //    startView: 2,
+    //    todayBtn: "linked",
+    //    language: "es",
+    //    autoclose: true,
+    //    todayHighlight: true,
+    //    datesDisabled: ['02/06/2016', '02/21/2016'],
+    //    toggleActive: true,
+    //    //defaultViewDate: { year: 1977, month: 04, day: 25 },
+    //});
 
     $("form[name=persona]").submit(function(e) {
         e.preventDefault();
