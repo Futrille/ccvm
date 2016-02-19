@@ -2,6 +2,8 @@
 
 var PROTOCOL    = 'http://';
 var SERVER      = 'localhost';
+var module      = 'prueba';
+var ENV         = 'app.php';
 var app         = {
         idEntidad: 0
 };
@@ -9,9 +11,9 @@ var app         = {
 var ROUTE;
 ROUTE = {
     MODULES: {
-        GANADOS: '/efi-core/web/app_dev.php/persona/',
-        GANADOS_NEW: '/efi-core/web/app_dev.php/persona/new',
-        GENERAL: '/efi-core/web/app_dev.php/general/valorvariable'
+        GANADOS: '/' + module + '/web/' + ENV + '/persona/',
+        GANADOS_NEW: '/' + module + '/web/' + ENV + '/persona/new',
+        GENERAL: '/' + module + '/web/' + ENV + '/general/valorvariable'
     }
 };
 
@@ -28,19 +30,19 @@ function getRoute(nameRoute, id){
     setIdEntidad(id);
     switch (nameRoute){
         case 'persona_index':
-            route = '/efi-core/web/app_dev.php/persona'
+            route = '/' + module + '/web/' + ENV + '/persona'
             break;
         case 'persona_new':
-            route = '/efi-core/web/app_dev.php/persona/new'
+            route = '/' + module + '/web/' + ENV + '/persona/new'
             break;
         case 'persona_edit':
-            route = '/efi-core/web/app_dev.php/persona/' + getIdEntidad() + '/edit'
+            route = '/' + module + '/web/' + ENV + '/persona/' + getIdEntidad() + '/edit'
             break;
         case 'persona_delete':
-            route = '/efi-core/web/app_dev.php/persona/' + getIdEntidad() + '/delete'
+            route = '/' + module + '/web/' + ENV + '/persona/' + getIdEntidad() + '/delete'
             break;
         default:
-            route = '/efi-core/web/app_dev.php/general';
+            route = '/' + module + '/web/' + ENV + '/general';
     }
     return route;
 }
