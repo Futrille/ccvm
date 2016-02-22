@@ -34,21 +34,19 @@ jQuery.cachedScript = function( url, options ) {
  * @param accion
  */
 function loadModule(modulo, vista, accion, id){
-    $.loader({
-        className:"blue-with-image-2",
-        content:''
-    });
+
     var wrapper = $("#page-wrapper");
     switch (accion){
         case 'Index':
-            wrapper.load("views/" + modulo + "/" + vista + accion + ".html", function (response, status, xhr) {
+            wrapper.load("views/" + modulo + "/" + vista + accion + ".html",
+                function (response, status, xhr) {
                 $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
-                    $.loader('close');
                 });
             });
             break;
         case 'Nuevo':
+            $.loader({ className:"blue-with-image-2", content:'' });
             wrapper.load(getRoute('persona_new'), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
             }, function (response, status, xhr) {
@@ -59,7 +57,7 @@ function loadModule(modulo, vista, accion, id){
             });
             break;
         case 'Editar':
-            //alert(app.idEntidad + 'rout: ' + getRoute('persona_edit', id));
+            $.loader({ className:"blue-with-image-2", content:'' });
             wrapper.load(getRoute('persona_edit', id), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76",
                 //"id":id

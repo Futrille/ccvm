@@ -43,9 +43,14 @@ function getRoute(nameRoute, id){
         case 'persona_delete':
             route = route + '/persona/' + getIdEntidad() + '/delete';
             break;
+        case 'persona_count':
+            route = route + '/persona/count';
+            break;
 
         case 'valorvariable_index':
             route = route + '/valorvariable/' + getIdEntidad() + '/delete';
+            break;
+
         default:
             route = route + '/general';
     }
