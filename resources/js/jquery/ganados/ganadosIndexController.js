@@ -8,7 +8,6 @@
     });
     getList(getRoute('persona_index'))
         .done(function(data) {
-            console.log(data);
             $.each(data, function(i, item) {
                 tablaActual.row.add( [
                     item.cedula,
@@ -21,10 +20,8 @@
                     item.idEsCompleto.nombre,
                 ] ).draw( false );
             });
-            console.log('prueba...');
         })
         .fail(function(dataFail) {
-
         })
         .always(function() {
             $.loader('close');

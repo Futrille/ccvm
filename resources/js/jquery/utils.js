@@ -33,7 +33,10 @@ jQuery.cachedScript = function( url, options ) {
  * @param vista
  * @param accion
  */
-function loadModule(modulo, vista, accion, id){
+function loadModule(modulo, vista, accion, id, messageCode){
+    if (id != null && id > 0){
+        setIdEntidad(id);
+    }
 
     var wrapper = $("#page-wrapper");
     switch (accion){
@@ -42,6 +45,7 @@ function loadModule(modulo, vista, accion, id){
                 function (response, status, xhr) {
                 $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    printMessage(getMessageCode());
                 });
             });
             break;
@@ -52,18 +56,21 @@ function loadModule(modulo, vista, accion, id){
             }, function (response, status, xhr) {
                 $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    printMessage(getMessageCode());
                     $.loader('close');
                 });
             });
             break;
         case 'Editar':
             $.loader({ className:"blue-with-image-2", content:'' });
-            wrapper.load(getRoute('persona_edit', id), {
+            console.log("ID PARA EDITAR: ", getIdEntidad());
+            wrapper.load(getRoute('persona_edit', getIdEntidad()), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76",
                 //"id":id
             }, function (response, status, xhr) {
                 $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
-                    console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    console.log("Script cargado Editar: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    printMessage(getMessageCode());
                     $.loader('close');
                 });
             });
