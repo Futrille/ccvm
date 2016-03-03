@@ -3,7 +3,7 @@
 var PROTOCOL    = 'http://';
 var SERVER      = 'localhost';
 var module      = '/efi-core';
-var ENV         = '';// /app_dev.php
+var ENV         = '/app_dev.php';// /app_dev.php
 var web         = '/web';
 var app         = {
         idEntidad: 0
