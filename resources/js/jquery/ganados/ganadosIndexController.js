@@ -27,5 +27,7 @@
             $.loader('close');
         });
 
-
+    $('#btn-ganados-index-registrar').click(function(){
+        loadModule('ganados','ganados','Nuevo');
+    });
 })();

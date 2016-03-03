@@ -94,23 +94,23 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="javascript:loadModule('monitor','monitor','Index');"><i class="fa fa-dashboard fa-fw"></i> Monitor</a>
+                            <a href="javascript:loadModule('monitor','monitor','Index');"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> Ganados<span class="fa arrow"></span>
+                            <a href="javascript:loadModule('ganados','ganados','Index');">
+                                <i class="fa fa-heart fa-fw"></i> Ganar</span>
                             </a>
-                            <ul class="nav nav-second-level">
+                            <!--<ul class="nav nav-second-level">
                                 <li>
                                     <a href="javascript:loadModule('ganados','ganados','Index');">Consultar</a>
                                 </li>
                                 <li>
                                     <a href="javascript:loadModule('ganados','ganados','Nuevo');">Registrar</a>
                                 </li>
-                            </ul>
+                            </ul>-->
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <!--<li>
                             <a href="#">
                                 <i class="fa fa-bar-chart-o fa-fw"></i> General<span class="fa arrow"></span>
                             </a>
@@ -119,8 +119,7 @@
                                     <a href="javascript:loadModule('general','valorVariable','Index');">Valores Variables</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -171,7 +170,7 @@
         });
     } );
 
-
+    loadModule('monitor','monitor','Index');
 </script>
 </body>
 </html>

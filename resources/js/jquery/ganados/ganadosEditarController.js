@@ -45,4 +45,10 @@
             });
     });
 
+    $('#btn-ganados-editar-cancelar').click(function(){
+        setIdEntidad(0);
+        setMesageCode(MSG_NO_MESSAGE);
+        loadModule('ganados','ganados','Index');
+    });
+
 })();
