@@ -8,7 +8,7 @@
     });
     getList(getRoute('persona_index'))
         .done(function(data) {
-            $.each(data, function(i, item) {
+            $.each(data.response, function(i, item) {
                 tablaActual.row.add( [
                     item.cedula,
                     '<a id="persona_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'ganados\',\'ganados\',\'Editar\',' + item.id + ');">' + item.nombres + '</a>',

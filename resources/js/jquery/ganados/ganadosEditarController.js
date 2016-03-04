@@ -13,7 +13,7 @@
             }
             else if (data != null && data.status != null && data.status == "success"){
                 setMesageCode(MSG_SAVE_SUCCESS);
-                loadModule('ganados','ganados','Editar', getIdEntidad());
+                loadModule('ganados','ganados','Index');
             }
         })
         .done(function() {
