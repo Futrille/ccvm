@@ -8,6 +8,11 @@
     });
     getList(getRoute('persona_index'))
         .done(function(data) {
+            console.log(data.resumen);
+            $.each(data.resumen, function(i, item) {
+                $('#ganados-resumen-tipo-' + item.id).html(item.cantidad);
+            });
+
             $.each(data.response, function(i, item) {
                 tablaActual.row.add( [
                     item.cedula,
