@@ -112,3 +112,12 @@ function getList(url){
     );
 }
 
+
+function validateSession(data){
+    if (data.status != undefined && data.status == 'logout'){
+        setMesageCode(MSG_LOGIN_ERROR);
+        printMessage(getMessageCode());
+        window.location.href = 'login.html';
+    }
+}
+

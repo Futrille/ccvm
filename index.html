@@ -160,6 +160,31 @@
     <!--<script src="resources/js/jquery/comunicacion.js"></script>-->
     <script src="resources/js/jquery/app.js"></script>
 <script>
+    var jqxhr = $.post( getRoute('homepage') , $('form[name=login]').serialize(), function(data, status, xhr) {
+        console.log(data.status, data, xhr);
+        if (data.status != undefined && data.status == 'success'){
+            setMesageCode(MSG_NO_MESSAGE);
+            //window.location.href = getRoute();
+        }else {
+            setMesageCode(MSG_LOGIN_ERROR);
+            printMessage(getMessageCode());
+            window.location.href = 'login.html';
+        }
+        //else {//if (data != null && data.status != null && data.status == "success"){
+        //setIdEntidad(data.response.id);
+        //setMesageCode(MSG_SAVE_SUCCESS);
+        //loadModule('ganados','ganados','Index');
+        //}
+    })
+    .done(function() {
+
+    })
+    .fail(function() {
+
+    })
+    .always(function() {
+
+    });
     $("#btn-inicio").on('click', function(){
         loadModule('monitor','monitor','Index');
     });

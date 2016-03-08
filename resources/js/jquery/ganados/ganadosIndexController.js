@@ -8,7 +8,7 @@
     });
     getList(getRoute('persona_index'))
         .done(function(data) {
-            console.log(data.resumen);
+            validateSession(data);
             $.each(data.resumen, function(i, item) {
                 $('#ganados-resumen-tipo-' + item.id).html(item.cantidad);
             });

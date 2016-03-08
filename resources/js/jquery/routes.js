@@ -3,6 +3,7 @@
 var PROTOCOL    = 'http://';
 var SERVER      = 'localhost';
 var module      = '/ivm-core';
+var front_dir   = '/ivm-web';    // /ivm
 var ENV         = '/app_dev.php';// /app_dev.php
 var web         = '/web';
 var app         = {
@@ -14,6 +15,7 @@ var MSG_SAVE_SUCCESS    = 1;
 var MSG_SAVE_ERROR      = 2;
 var MSG_DELETE_SUCCESS  = 3;
 var MSG_DELETE_ERROR    = 4;
+var MSG_LOGIN_ERROR     = 5;
 
 var ROUTE;
 ROUTE = {
@@ -56,12 +58,17 @@ function getRoute(nameRoute, id){
         case 'valorvariable_index':
             route = route + '/valorvariable/' + getIdEntidad() + '/delete';
             break;
+
         case 'login':
             route = route + '/login';
             break;
 
+        case 'homepage':
+            route = route + '/';
+            break;
+
         default:
-            route = route + '/login';
+            route = front_dir;
     }
     return route;
 }
@@ -109,6 +116,10 @@ function printMessage(messageCode, message){
             break;
         case MSG_DELETE_ERROR:
             messagePrint    = 'Error al Eliminar.';
+            classPrint      = 'alert alert-danger alert-dismissable';
+
+        case MSG_LOGIN_ERROR:
+            messagePrint    = 'Error al Iniciar Sesi&oacute;n.';
             classPrint      = 'alert alert-danger alert-dismissable';
         default:
 

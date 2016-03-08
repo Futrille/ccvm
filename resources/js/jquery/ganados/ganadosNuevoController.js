@@ -18,8 +18,8 @@
     $("form[name=persona]").submit(function(e) {
         e.preventDefault();
 
-
         var jqxhr = $.post( getRoute('persona_new') , $('form[name=persona]').serialize(), function(data, status, xhr) {
+            validateSession(data);
             if (data != null && data.status != null && data.status == "error"){
                 setMesageCode(MSG_SAVE_ERROR);
                 printMessage(getMessageCode());

@@ -6,7 +6,7 @@
         console.log("ID:" + getIdEntidad(), $('form[name=persona]').serialize());
 
         var jqxhr = $.post( getRoute('persona_edit', getIdEntidad()) , $('form[name=persona]').serialize(), function(data, status, xhr) {
-            //console.log("Respuesta:", data, status, xhr);
+            validateSession(data);
             if (data != null && data.status != null && data.status == "error"){
                 setMesageCode(MSG_SAVE_ERROR);
                 printMessage(getMessageCode());
@@ -27,6 +27,7 @@
     $("form[name=form]").submit(function(e) {
         e.preventDefault();
         var jqxhr = $.post( getRoute('persona_delete', getIdEntidad()) , $('form[name=form]').serialize(), function(data, status, xhr) {
+            validateSession(data);
             if (data != null && data.status != null && data.status == "error"){
                 setMesageCode(MSG_DELETE_ERROR);
                 printMessage(getMessageCode());
