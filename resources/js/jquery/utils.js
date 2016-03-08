@@ -63,13 +63,24 @@ function loadModule(modulo, vista, accion, id, messageCode){
             break;
         case 'Editar':
             $.loader({ className:"blue-with-image-2", content:'' });
-            console.log("ID PARA EDITAR: ", getIdEntidad());
             wrapper.load(getRoute('persona_edit', getIdEntidad()), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76",
                 //"id":id
             }, function (response, status, xhr) {
                 $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado Editar: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    printMessage(getMessageCode());
+                    $.loader('close');
+                });
+            });
+            break;
+        case 'Login':
+            $.loader({ className:"blue-with-image-2", content:'' });
+            wrapper.load(getRoute('login'), {
+                "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
+            }, function (response, status, xhr) {
+                $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                    console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
                     $.loader('close');
                 });

@@ -2,8 +2,8 @@
 
 var PROTOCOL    = 'http://';
 var SERVER      = 'localhost';
-var module      = '/efi-core';
-var ENV         = '';// /app_dev.php
+var module      = '/ivm-core';
+var ENV         = '/app_dev.php';// /app_dev.php
 var web         = '/web';
 var app         = {
         idEntidad: 0
@@ -56,9 +56,12 @@ function getRoute(nameRoute, id){
         case 'valorvariable_index':
             route = route + '/valorvariable/' + getIdEntidad() + '/delete';
             break;
+        case 'login':
+            route = route + '/login';
+            break;
 
         default:
-            route = route + '/general';
+            route = route + '/login';
     }
     return route;
 }

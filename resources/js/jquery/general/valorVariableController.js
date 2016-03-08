@@ -7,7 +7,6 @@
 
     getList(getRoute('valorvariable_index'))
         .done(function(data) {
-            console.log(data);
             $.each(data, function(i, item) {
                 tablaActual.row.add( [
                     item.id,

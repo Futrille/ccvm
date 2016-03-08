@@ -20,7 +20,6 @@
 
 
         var jqxhr = $.post( getRoute('persona_new') , $('form[name=persona]').serialize(), function(data, status, xhr) {
-            console.log(data);
             if (data != null && data.status != null && data.status == "error"){
                 setMesageCode(MSG_SAVE_ERROR);
                 printMessage(getMessageCode());
