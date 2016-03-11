@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b19a7b5c-1303-4f51-8304-429dd147b30b" name="qa-ivm-web" url="http://ftp.iglesiavisionmundial.com.ve">
+        <fileTransfer host="ftp.iglesiavisionmundial.com.ve" port="21" password="dffcdfdddfecdfd1dfe4dfc6dfcfdfcfdf9ddfcedfdbdfc7" username="qa-ivm@iglesiavisionmundial.com.ve">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
