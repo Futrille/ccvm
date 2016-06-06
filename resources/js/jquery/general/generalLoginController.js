@@ -2,6 +2,7 @@
     'use strict';
 
     $( "#btn-entrar" ).click(function() {
+        console.log("Entrar boton...");
         $('form[name=login]').submit();
     });
 
@@ -12,7 +13,7 @@
             console.log(data.status, data, xhr);
             if (data.status != undefined && data.status == 'success'){
                 setMesageCode(MSG_NO_MESSAGE);
-                window.location.href = getRoute();
+                //window.location.href = getRoute();
             }else {
                 setMesageCode(MSG_LOGIN_ERROR);
                 printMessage(getMessageCode());

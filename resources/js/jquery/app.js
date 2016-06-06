@@ -1,12 +1,13 @@
 (function() {
     'use strict';
 
-    $.loader({ className:"blue-with-image-2", content:'' });
+    //$.loader({ className:"blue-with-image-2", content:'' });
     var jqxhr = $.post( getRoute('homepage') , $('form[name=login]').serialize(), function(data, status, xhr) {
+        console.log(data);
         if (data.status != undefined && data.status == 'success'){
             setMesageCode(MSG_NO_MESSAGE);
             //window.location.href = getRoute(
-            cargarPanel();
+            //cargarPanel();
         }else {
             setMesageCode(MSG_LOGIN_ERROR);
             printMessage(getMessageCode());
