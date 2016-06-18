@@ -11,9 +11,10 @@
         console.log("submitted...", $('form[name=login]').serialize());
         var jqxhr = $.post( getRoute('login') , $('form[name=login]').serialize(), function(data, status, xhr) {
             console.log(data.status, data, xhr);
+            console.log(data.status, data, xhr);
             if (data.status != undefined && data.status == 'success'){
                 setMesageCode(MSG_NO_MESSAGE);
-                //window.location.href = getRoute();
+                window.location.href = getRoute();
             }else {
                 setMesageCode(MSG_LOGIN_ERROR);
                 printMessage(getMessageCode());

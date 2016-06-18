@@ -3,12 +3,12 @@
 
     //$.loader({ className:"blue-with-image-2", content:'' });
     var jqxhr = $.post( getRoute('homepage') , $('form[name=login]').serialize(), function(data, status, xhr) {
-        console.log(data);
+        console.log("data",data);
         if (data.status != undefined && data.status == 'success'){
             setMesageCode(MSG_NO_MESSAGE);
-            //window.location.href = getRoute(
-            //cargarPanel();
-        }else {
+            //window.location.href = getRoute();
+            cargarPanel();
+        }else if (data.status == 'logout'){
             setMesageCode(MSG_LOGIN_ERROR);
             printMessage(getMessageCode());
             window.location.href = 'login.html';

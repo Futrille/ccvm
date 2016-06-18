@@ -4,7 +4,7 @@ var PROTOCOL    = 'http://';
 var SERVER      = 'localhost';
 var module      = '/ivm-core';
 var front_dir   = '/ivm-web';    // /ivm
-var ENV         = '/app_dev.php';// /app_dev.php
+var ENV         = '/app_dev.php';// /app.php
 var web         = '/web';
 var app         = {
         idEntidad: 0
@@ -128,7 +128,7 @@ function printMessage(messageCode, message){
     if (messageCode != MSG_NO_MESSAGE) {
         $("#notificaciones").html(
             '<div class="col-lg-12"><div class="' + classPrint + '">' +
-            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+            '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">ï¿½</button>' +
             messagePrint + '</div></div>'
         );
         setMesageCode(MSG_NO_MESSAGE);
