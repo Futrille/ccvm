@@ -1,7 +1,7 @@
 
 
 /**
- * Consiguración para guardar cache de las llamadas asincronas
+ * Consiguraciï¿½n para guardar cache de las llamadas asincronas
  */
 //$.ajaxSetup({
 //    cache: true
@@ -43,7 +43,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
         case 'Index':
             wrapper.load("views/" + modulo + "/" + vista + accion + ".html",
                 function (response, status, xhr) {
-                $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
                 });
@@ -54,7 +54,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
             wrapper.load(getRoute('persona_new'), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
             }, function (response, status, xhr) {
-                $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
                     $.loader('close');
@@ -67,7 +67,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76",
                 //"id":id
             }, function (response, status, xhr) {
-                $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado Editar: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
                     $.loader('close');
@@ -79,7 +79,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
             wrapper.load(getRoute('login'), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
             }, function (response, status, xhr) {
-                $.cachedScript("resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
                     $.loader('close');
