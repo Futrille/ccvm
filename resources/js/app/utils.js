@@ -44,7 +44,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
             wrapper.load("views/" + modulo + "/" + vista + accion + ".html",
                 function (response, status, xhr) {
                 $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
-                    console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
                 });
             });
@@ -55,7 +55,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
             }, function (response, status, xhr) {
                 $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
-                    console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
                     $.loader('close');
                 });
@@ -68,7 +68,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 //"id":id
             }, function (response, status, xhr) {
                 $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
-                    console.log("Script cargado Editar: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    console.log("Script cargado Editar: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
                     $.loader('close');
                 });
@@ -80,7 +80,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
             }, function (response, status, xhr) {
                 $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
-                    console.log("Script cargado: " + "resources/js/jquery/" + modulo + "/" + vista + accion + "Controller.js");
+                    console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
                     $.loader('close');
                 });
@@ -101,17 +101,12 @@ function getList(url){
         className:"blue-with-image-2",
         content:''
     });
-    return $.get(
-        url,
-        {
+    return $.get(url,{
             apiKey:'77fa53ff60e8f41e40260b0dad826d76',
             "_": $.now()
-        },
-        null,
-        'json'
+        },null,'json'
     );
 }
-
 
 function validateSession(data){
     if (data.status != undefined && data.status == 'logout'){

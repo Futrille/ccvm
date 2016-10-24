@@ -26,6 +26,8 @@ ROUTE = {
     }
 };
 
+var R_FAMILIA_INDEX = module + web + ENV + '/familia';
+
 function getIdEntidad(){
     return app.idEntidad;
 }

@@ -18,24 +18,24 @@
         return time;
     }
 
-    getList(getRoute('persona_index'))
+    getList(R_FAMILIA_INDEX + '/PRU-2016/index.json')
         .done(function(data) {
             console.log("data", data);
-            validateSession(data);
-            $.each(data.resumen, function(i, item) {
-                $('#ganados-resumen-tipo-' + item.id).html(item.cantidad);
-            });
-
-            $.each(data.response, function(i, item) {
-                tablaActual.row.add( [
-                    item.idRolFamilia.nombre,
-                    '<a id="persona_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'ganados\',\'ganados\',\'Editar\',' + item.id + ');">' + item.nombres + '</a>',
-                    item.telefono,
-                    item.correo,
-                    item.metodoGanar.nombre,
-                    getFecha(item.fechaGanado.timestamp),
-                ] ).draw( false );
-            });
+            // validateSession(data);
+            // $.each(data.resumen, function(i, item) {
+            //     $('#ganados-resumen-tipo-' + item.id).html(item.cantidad);
+            // });
+            //
+            // $.each(data.response, function(i, item) {
+            //     tablaActual.row.add( [
+            //         item.idRolFamilia.nombre,
+            //         '<a id="persona_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'ganados\',\'ganados\',\'Editar\',' + item.id + ');">' + item.nombres + '</a>',
+            //         item.telefono,
+            //         item.correo,
+            //         item.metodoGanar.nombre,
+            //         getFecha(item.fechaGanado.timestamp),
+            //     ] ).draw( false );
+            // });
         })
         .fail(function(dataFail) {
         })
@@ -44,6 +44,6 @@
         });
 
     $('#btn-ganados-index-registrar').click(function(){
-        loadModule('ganados','ganados','Nuevo');
+        // loadModule('ganados','ganados','Nuevo');
     });
 })();
