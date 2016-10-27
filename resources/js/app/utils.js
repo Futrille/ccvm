@@ -50,19 +50,19 @@ function loadModule(modulo, vista, accion, id, messageCode){
             });
             break;
         case 'Nuevo':
-            $.loader({ className:"blue-with-image-2", content:'' });
+            // $.loader({ className:"blue-with-image-2", content:'' });
             wrapper.load(getRoute('persona_new'), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
             }, function (response, status, xhr) {
                 $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
-                    $.loader('close');
+                    // $.loader('close');
                 });
             });
             break;
         case 'Editar':
-            $.loader({ className:"blue-with-image-2", content:'' });
+            // $.loader({ className:"blue-with-image-2", content:'' });
             wrapper.load(getRoute('persona_edit', getIdEntidad()), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76",
                 //"id":id
@@ -70,19 +70,19 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado Editar: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
-                    $.loader('close');
+                    // $.loader('close');
                 });
             });
             break;
         case 'Login':
-            $.loader({ className:"blue-with-image-2", content:'' });
+            // $.loader({ className:"blue-with-image-2", content:'' });
             wrapper.load(getRoute('login'), {
                 "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
             }, function (response, status, xhr) {
                 $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
                     printMessage(getMessageCode());
-                    $.loader('close');
+                    // $.loader('close');
                 });
             });
             break;

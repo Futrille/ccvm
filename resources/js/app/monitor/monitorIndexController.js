@@ -8,12 +8,14 @@
                 $('#ganados_cantidad').html(data.response);
             }
         })
-        .fail(function(dataFail) {
-
-        })
+        .fail(function(dataFail) {})
         .always(function() {
-            // $.loader('close');
+            // if ($('#ganados_cantidad').html() ){
+            //     $('#ganados_cantidad').html("-");
+            // }
         });
 
-
+    $("#consultar-nivel-1").on('click', function(){
+        loadModule('ganados','ganados','Index');
+    });
 })();

@@ -1,11 +1,11 @@
 (function() {
     'use strict';
-    var tablaActual = $('#table-example').DataTable({
-        responsive: true,
-        "language": {
-            "url": "dataTables.spanish.lang"
-        }
-    });
+    // var tablaActual = $('#table-example').DataTable({
+    //     responsive: true,
+    //     "language": {
+    //         "url": "dataTables.spanish.lang"
+    //     }
+    // });
 
     function getFecha(timestamp){
         var a = new Date(timestamp * 1000);
@@ -40,10 +40,7 @@
         .fail(function(dataFail) {
         })
         .always(function() {
-            $.loader('close');
+            $( "#table-loader" ).remove();
         });
 
-    $('#btn-ganados-index-registrar').click(function(){
-        // loadModule('ganados','ganados','Nuevo');
-    });
 })();
