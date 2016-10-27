@@ -3,7 +3,7 @@
 
     getList(getRoute('persona_count'))
         .done(function(data) {
-            validateSession(data);
+            // validateSession(data);
             if (data != null){
                 $('#ganados_cantidad').html(data.response);
             }
