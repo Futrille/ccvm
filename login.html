@@ -24,15 +24,15 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <div class="col-md-4 col-md-offset-5">
-            <img src="resources/images/logo.png" />
-        </div>
-        <!--<a href=""><b>IVM</b> Online</a>-->
+        <!--<div class="col-md-4 col-md-offset-5">-->
+
+        <!--</div>-->
+        <a href=""><img src="resources/images/logo.png" /></a>
     </div>
     <div class="login-box-body">
         <p class="login-box-msg">Ingrese sus credenciales para Iniciar Sesión</p>
 
-        <form action="index.html" method="post">
+        <form name="login" action="index.html" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" placeholder="N&uacute;mero de C&eacute;dula">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -50,7 +50,7 @@
                     <!--</div>-->
                 <!--</div>-->
                 <div class="col-xs-4">
-                    <button id="btn-entrar" type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                    <button id="btn-entrar" type="button" class="btn btn-primary btn-block btn-flat">Entrar</button>
                 </div>
             </div>
         </form>
@@ -72,6 +72,10 @@
 <script src="resources/themes/admin-lte-2.3.7/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="resources/themes/admin-lte-2.3.7/bootstrap/js/bootstrap.min.js"></script>
 <script src="resources/themes/admin-lte-2.3.7/plugins/iCheck/icheck.min.js"></script>
+
+<script src="resources/js/app/utils.js"></script>
+<script src="resources/js/app/routes.js"></script>
+
 <script>
     $(function () {
         $('input').iCheck({
