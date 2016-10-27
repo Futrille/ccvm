@@ -30,10 +30,10 @@
      }
 
     function hacerClick(){
-         // $("#btn-inicio").on('click', function(){
-         //     loadModule('monitor','monitor','Index');
-         // });
-         // $( "#btn-inicio" ).trigger( "click" );
+         $("#btn-inicio").on('click', function(){
+             loadModule('monitor','monitor','Index');
+         });
+         $( "#btn-inicio" ).trigger( "click" );
     }
 })();
 

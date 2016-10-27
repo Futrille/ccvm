@@ -1,7 +1,6 @@
 (function() {
     'use strict';
 
-    $.loader({ className:"blue-with-image-2", content:'' });
     getList(getRoute('persona_count'))
         .done(function(data) {
             validateSession(data);
@@ -13,7 +12,7 @@
 
         })
         .always(function() {
-            $.loader('close');
+            // $.loader('close');
         });
 
 

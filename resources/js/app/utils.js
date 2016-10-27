@@ -97,10 +97,11 @@ function loadModule(modulo, vista, accion, id, messageCode){
  * @returns {*}
  */
 function getList(url){
-    $.loader({
-        className:"blue-with-image-2",
-        content:''
-    });
+    // $.loader({
+    //     className:"blue-with-image-2",
+    //     content:''
+    // });
+    console.log("url", url);
     return $.get(url,{
             apiKey:'77fa53ff60e8f41e40260b0dad826d76',
             "_": $.now()
