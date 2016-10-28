@@ -18,4 +18,8 @@
     $("#consultar-nivel-1").on('click', function(){
         loadModule('ganados','ganados','Index');
     });
+
+    $("#btn-niveles").on('click', function(){
+        loadModule('nivel','nivel','Index');
+    });
 })();
