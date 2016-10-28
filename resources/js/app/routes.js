@@ -26,7 +26,7 @@ ROUTE = {
     }
 };
 var R_PERSONA_COUNT = module + web + ENV + '/persona/count';
-var R_FAMILIA_INDEX = module + web + ENV + '/familia/';
+var R_FAMILIA_INDEX = module + web + ENV + '/familia';
 var R_NIVEL_INDEX = module + web + ENV + '/nivel/';
 
 function getIdEntidad(){
@@ -40,19 +40,19 @@ function setIdEntidad(id){
 function getRoute(nameRoute, id){
     var route = module + web + ENV;
     setIdEntidad(id);
-    
+
     switch (nameRoute){
         case 'persona_index':
             route = route + '/persona/';
             break;
         case 'persona_new':
-            route = route + '/persona/new/';
+            route = route + '/persona/new';
             break;
         case 'persona_edit':
-            route = route + '/persona/' + getIdEntidad() + '/edit/';
+            route = route + '/persona/' + getIdEntidad() + '/edit';
             break;
         case 'persona_delete':
-            route = route + '/persona/' + getIdEntidad() + '/delete/';
+            route = route + '/persona/' + getIdEntidad() + '/delete';
             break;
         case 'persona_count':
             route = route + '/persona/count/';

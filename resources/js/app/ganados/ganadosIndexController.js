@@ -4,13 +4,13 @@
     var tablaActual = null;
     try{
         tablaActual = $("#ganados-main-table").DataTable({
-            "paging": true,
+            "paging": false,
             "lengthChange": false,
-            "searching": true,
+            "searching": false,
             "ordering": false,
-            "info": true,
-            "autoWidth": false
-            //"responsive": false
+            "info": false,
+            "autoWidth": false,
+            "responsive": true
         });
     }
     catch (e){
@@ -62,5 +62,8 @@
             $( "#table-loader" ).remove();
         });
 
-    
+    $("#btn-registrar-familia").on('click', function(){
+        loadModule('ganados','ganados','Nuevo');
+    });
+
 })();

@@ -47,57 +47,62 @@ jQuery.cachedScript = function( url, options ) {
  * @param accion
  */
 function loadModule(modulo, vista, accion, id, messageCode){
-    if (id != null && id > 0){
-        setIdEntidad(id);
-    }
+    try {
+        if (id != null && id > 0) {
+            setIdEntidad(id);
+        }
 
-    var wrapper = $("#page-wrapper");
-    switch (accion){
-        case 'Index':
-            wrapper.load("views/" + modulo + "/" + vista + accion + ".html", {
-                "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
-            }, function (response, status, xhr) {
+        var wrapper = $("#page-wrapper");
+        switch (accion) {
+            case 'Index':
+                wrapper.load("views/" + modulo + "/" + vista + accion + ".html", {
+                    "apiKey": "77fa53ff60e8f41e40260b0dad826d76"
+                }, function (response, status, xhr) {
+                    $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                        console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
+                        // printMessage(getMessageCode());
+                    });
+                });
+                break;
+            case 'Nuevo':
+                wrapper.load(getRoute('persona_new'), {
+                    "apiKey": "77fa53ff60e8f41e40260b0dad826d76"
+                }, function (response, status, xhr) {
                     $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                         console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
                         printMessage(getMessageCode());
                     });
                 });
-            break;
-        case 'Nuevo':
-            wrapper.load(getRoute('persona_new'), {
-                "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
-            }, function (response, status, xhr) {
-                $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
-                    console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
-                    printMessage(getMessageCode());
+                break;
+            case 'Editar':
+                wrapper.load(getRoute('persona_edit', getIdEntidad()), {
+                    "apiKey": "77fa53ff60e8f41e40260b0dad826d76",
+                    //"id":id
+                }, function (response, status, xhr) {
+                    $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                        console.log("Script cargado Editar: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
+                        printMessage(getMessageCode());
+                    });
                 });
-            });
-            break;
-        case 'Editar':
-            wrapper.load(getRoute('persona_edit', getIdEntidad()), {
-                "apiKey":"77fa53ff60e8f41e40260b0dad826d76",
-                //"id":id
-            }, function (response, status, xhr) {
-                $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
-                    console.log("Script cargado Editar: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
-                    printMessage(getMessageCode());
+                break;
+            case 'Login':
+                // $.loader({ className:"blue-with-image-2", content:'' });
+                wrapper.load(getRoute('login'), {
+                    "apiKey": "77fa53ff60e8f41e40260b0dad826d76"
+                }, function (response, status, xhr) {
+                    $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
+                        console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
+                        printMessage(getMessageCode());
+                        // $.loader('close');
+                    });
                 });
-            });
-            break;
-        case 'Login':
-            // $.loader({ className:"blue-with-image-2", content:'' });
-            wrapper.load(getRoute('login'), {
-                "apiKey":"77fa53ff60e8f41e40260b0dad826d76"
-            }, function (response, status, xhr) {
-                $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
-                    console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
-                    printMessage(getMessageCode());
-                    // $.loader('close');
-                });
-            });
-            break;
-        default:
+                break;
+            default:
 
+        }
+    }
+    catch(e){
+        console.log("Error [Util]: " + e.messsage);
     }
 }
 
