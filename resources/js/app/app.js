@@ -1,6 +1,8 @@
 (function() {
     'use strict';
 
+    
+
     // var jqxhr = $.post( getRoute('homepage') , $('form[name=login]').serialize(), function(data, status, xhr) {
     //     console.log("data",data);
     //     if (data.status != undefined && data.status == 'success'){
@@ -31,6 +33,7 @@
 
     function hacerClick(){
         $('ul.sidebar-menu > li').on('click', function(){
+            $.xhrPool.abortAll();
             $.each($('ul.sidebar-menu > li'), function(i, item) {
                 $(item).removeClass('active');
             });
@@ -41,6 +44,14 @@
              loadModule('monitor','monitor','Index');
          });
          $( "#btn-inicio" ).trigger( "click" );
+
+        $("#btn-niveles").on('click', function(){
+            loadModule('nivel','nivel','Index');
+        });
+
+        $("#btn-registrar").on('click', function(){
+            loadModule('ganados','ganados','Index');
+        });
     }
 })();
 
