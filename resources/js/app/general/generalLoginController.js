@@ -2,7 +2,6 @@
     'use strict';
 
     $( "#btn-entrar" ).click(function() {
-        console.log("Entrar boton...");
         $('form[name=login]').submit();
     });
 

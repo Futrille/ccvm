@@ -1,7 +1,7 @@
 
 
 /**
- * Consiguraci�n para guardar cache de las llamadas asincronas
+ * Consiguracion para guardar cache de las llamadas asincronas
  */
 //$.ajaxSetup({
 //    cache: true
@@ -41,7 +41,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
     var wrapper = $("#page-wrapper");
     switch (accion){
         case 'Index':
-            wrapper.load("views/" + modulo + "/" + vista + accion + ".html",
+            wrapper.load("views/" + modulo + "/" + vista + accion + ".html", {futri:123},
                 function (response, status, xhr) {
                 $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                     console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");

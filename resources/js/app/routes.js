@@ -25,7 +25,7 @@ ROUTE = {
         GENERAL: module + web + ENV + '/general/valorvariable'
     }
 };
-
+var R_PERSONA_COUNT = module + web + ENV + '/persona/count';
 var R_FAMILIA_INDEX = module + web + ENV + '/familia';
 var R_NIVEL_INDEX = module + web + ENV + '/nivel';
 
