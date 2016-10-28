@@ -4,9 +4,9 @@
 (function() {
     'use strict';
 
-    var tablaActual = null;
+    var tablaActual2 = null;
     try{
-        tablaActual = $("#nivel-main-table").DataTable({
+        tablaActual2 = $("#nivel-main-table").DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": true,
@@ -31,8 +31,8 @@
             //
             $.each(response.data, function(i, item) {
                 console.log(item);
-                  if (tablaActual != null){
-                    tablaActual.row.add( [
+                  if (tablaActual2 != null){
+                    tablaActual2.row.add( [
                         'combobox',
                         'acciones',
                         item.orden,

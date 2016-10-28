@@ -23,13 +23,20 @@
     //     //$.loader('close');
     // });
 
-     function cargarPanel(){
-         $('#ivm-header-menu').load('views/index/header-menu.html');
-         $('#ivm-footer').load('views/index/footer.html');
-         $('#ivm-side-menu').load('views/index/side-menu.html', hacerClick);
-     }
+    function cargarPanel(){
+     $('#ivm-header-menu').load('views/index/header-menu.html');
+     $('#ivm-footer').load('views/index/footer.html');
+     $('#ivm-side-menu').load('views/index/side-menu.html', hacerClick);
+    }
 
     function hacerClick(){
+        $('ul.sidebar-menu > li').on('click', function(){
+            $.each($('ul.sidebar-menu > li'), function(i, item) {
+                $(item).removeClass('active');
+            });
+            $(this).addClass('active');
+        });
+
          $("#btn-inicio").on('click', function(){
              loadModule('monitor','monitor','Index');
          });
