@@ -70,7 +70,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 }, function (response, status, xhr) {
                     $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                         console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
-                        printMessage(getMessageCode());
+                        // printMessage(getMessageCode());
                     });
                 });
                 break;
@@ -86,7 +86,6 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 });
                 break;
             case 'Login':
-                // $.loader({ className:"blue-with-image-2", content:'' });
                 wrapper.load(getRoute('login'), {
                     "apiKey": "77fa53ff60e8f41e40260b0dad826d76"
                 }, function (response, status, xhr) {

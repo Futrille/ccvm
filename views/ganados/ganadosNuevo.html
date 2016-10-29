@@ -1,0 +1,76 @@
+<section id="page-wrapper" class="content">
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Registrar Persona Ganada</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <form name="persona" method="post">
+                    <div class="panel-heading">
+                        Ingrese los datos de la persona.
+                    </div>
+
+                    <div class="panel-body">
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="persona_nombres" class="required">Nombres: </label>
+
+                                <input type="text" id="persona_nombres" name="persona[nombres]" required="required" class="form-control" maxlength="100">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="persona_correo">Correo Electronico: </label>
+
+                                <input type="email" id="persona_correo" name="persona[correo]" class="form-control" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="persona_telefono">Telefono de Contacto: </label>
+
+                                <input type="text" id="persona_telefono" name="persona[telefono]" class="form-control" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="persona_rolFamilia" class="required">Rol en Familia: </label>
+
+                                <select id="persona_rolFamilia" name="persona[rolFamilia]" class="form-control">            <option value="21">Padre de la Familia</option>            <option value="22">Madre de la Familia</option>            <option value="23">Hijo (Masculino)</option>            <option value="24">Hija (Femenino)</option>            <option value="25">Abuelo</option>            <option value="26">Abuela</option>            <option value="27">Amigo de la Familia</option>            <option value="28">Amiga de la Familia</option></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="persona_metodoGanar" class="required">Como fue ganado: </label>
+
+                                <select id="persona_metodoGanar" name="persona[metodoGanar]" class="form-control">            <option value="1">Evangelización</option>            <option value="2">SuperGAM</option>            <option value="3">GAM</option>            <option value="4">Personal</option>            <option value="5">Templo</option></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="persona_fechaGanado" class="required">Fecha de Conversion: </label>
+
+                                <input type="date" id="persona_fechaGanado" name="persona[fechaGanado]" required="required" class="form-control">
+                            </div>
+                        </div>
+                        <div id="notificaciones"></div>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="submit" class="btn btn-primary" value="Guardar">
+                        <button type="reset" class="btn btn-default">Limpiar</button>
+                        <button type="button" id="btn-ganados-registrar-cancelar" class="btn btn-default">Cancelar</button>
+                    </div>
+                    <input type="hidden" id="persona__token" name="persona[_token]" value="uKi_2O0RhZaLxL0sAVkBYMmTMfR_KRl6DzG0VyesGes"></form>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>

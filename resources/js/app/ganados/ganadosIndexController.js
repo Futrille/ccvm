@@ -1,15 +1,18 @@
 (function() {
     'use strict';
 
+    setTitle('Familias Conectadas ');
+    setTitleDescription('');
+
     var tablaActual = null;
     var data = null;
     try{
         tablaActual = $("#ganados-main-table").DataTable({
-            "paging": false,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": false,
-            "info": false,
+        "paging": false,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
+        "info": false,
             "autoWidth": false,
             "responsive": true
         });
@@ -18,8 +21,6 @@
         console.log("Error [Ganados/Index/Controller]:", e.message);
     }
 
-    setTitle('Listado de Familias');
-    setTitleDescription("Familias conectadas sin iniciar proceso.");
 
     /**
      *
