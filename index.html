@@ -25,44 +25,20 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <header id="ivm-header-menu" class="main-header"></header>
     <aside id="ivm-side-menu" class="main-sidebar"></aside>
 
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-
-                <small></small>
+        <section id="page-wrapper-header" class="content-header">
+            <h1 id="page-title">
+                <small id="page-title-descripcion"></small>
             </h1>
-            <!--<ol class="breadcrumb">-->
-                <!--<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>-->
-                <!--<li class="active">Here</li>-->
-            <!--</ol>-->
+            <ol id="page-title-breadcrumb" class="breadcrumb"></ol>
+            <!--<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>-->
+            <!--<li class="active">Here</li>-->
         </section>
-
         <section id="page-wrapper" class="content"></section>
     </div>
 

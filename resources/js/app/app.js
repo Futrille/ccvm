@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-
+    clearSessionStorage();
     
 
     // var jqxhr = $.post( getRoute('homepage') , $('form[name=login]').serialize(), function(data, status, xhr) {
@@ -26,9 +26,9 @@
     // });
 
     function cargarPanel(){
-     $('#ivm-header-menu').load('views/index/header-menu.html');
-     $('#ivm-footer').load('views/index/footer.html');
-     $('#ivm-side-menu').load('views/index/side-menu.html', hacerClick);
+        $('#ivm-header-menu').load('views/index/header-menu.html');
+        $('#ivm-footer').load('views/index/footer.html');
+        $('#ivm-side-menu').load('views/index/side-menu.html', hacerClick);
     }
 
     function hacerClick(){
@@ -53,6 +53,7 @@
             loadModule('ganados','ganados','Index');
         });
     }
+    
 })();
 
 

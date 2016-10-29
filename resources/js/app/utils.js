@@ -12,7 +12,7 @@ $.xhrPool.abortAll = function() {
 $.ajaxSetup({
     beforeSend: function(jqXHR) {
 
-    }, //  add connection to list
+    },
     complete: function(jqXHR) {
         var i = $.xhrPool.indexOf(jqXHR);   //  get index for current connection completed
         if (i > -1) $.xhrPool.splice(i, 1); //  removes from list by index
@@ -112,7 +112,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
  * @returns {*}
  */
 function getList(url){
-    // $(document).ajaxStart(function() { Pace.restart(); });
+    $(document).ajaxStart(function() { Pace.restart(); });
     var jqXHR = $.get(url,{
             apiKey:'77fa53ff60e8f41e40260b0dad826d76',
             "_": $.now()
@@ -167,8 +167,45 @@ function setToSessionStorage(clave, value){
     sessionStorage.setItem(clave, value + '-' + $.now());
 }
 
+/**
+ *
+ */
+function clearSessionStorage(){
+    sessionStorage.clear();
+}
 
+var TITLE = '';
+var TITLE_DESCRIPTION = '';
 
+function setTitle(titulo){
+    TITLE = titulo;
+    $('#page-title').html(TITLE + '<small id="page-title-descripcion">' + TITLE_DESCRIPTION + '</small>');
+}
+
+function setTitleDescription(valor){
+    TITLE_DESCRIPTION = valor;
+    $('#page-title-descripcion').html(TITLE_DESCRIPTION);
+}
+
+JSON.stringify = JSON.stringify || function (obj) {
+        var t = typeof (obj);
+        if (t != "object" || obj === null) {
+            // simple data type
+            if (t == "string") obj = '"'+obj+'"';
+            return String(obj);
+        }
+        else {
+            // recurse array or object
+            var n, v, json = [], arr = (obj && obj.constructor == Array);
+            for (n in obj) {
+                v = obj[n]; t = typeof(v);
+                if (t == "string") v = '"'+v+'"';
+                else if (t == "object" && v !== null) v = JSON.stringify(v);
+                json.push((arr ? "" : '"' + n + '":') + String(v));
+            }
+            return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
+        }
+    };
 
 
 

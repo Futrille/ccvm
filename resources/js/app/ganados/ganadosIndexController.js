@@ -2,6 +2,7 @@
     'use strict';
 
     var tablaActual = null;
+    var data = null;
     try{
         tablaActual = $("#ganados-main-table").DataTable({
             "paging": false,
@@ -16,6 +17,9 @@
     catch (e){
         console.log("Error [Ganados/Index/Controller]:", e.message);
     }
+
+    setTitle('Listado de Familias');
+    setTitleDescription("Familias conectadas sin iniciar proceso.");
 
     /**
      *
@@ -32,38 +36,55 @@
         var time = date.substr(-2) + '/' + month.substr(-2) + '/' + year;
         return time;
     }
+    console.log('Session familia:',$.parseJSON(sessionStorage.getItem('ganados-familia-index')));
 
-    getList(R_FAMILIA_INDEX + '/PRU-1986/index.json')
-        .done(function(response) {
-            // validateSession(data);
-            // $.each(data.resumen, function(i, item) {
-            //     $('#ganados-resumen-tipo-' + item.id).html(item.cantidad);
-            // });
-            //
-            $.each(response.data, function(i, item) {
-                if (tablaActual != null){
-                    tablaActual.row.add( [
-                        (i+1),
-                        item.id,
-                        item.nombre,
-                        item.integrantes
-                        // '<a id="persona_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'ganados\',\'ganados\',\'Editar\',' + item.id + ');">' + item.nombres + '</a>',
-                        // item.telefono,
-                        // item.correo,
-                        // item.metodoGanar.nombre,
-                        // getFecha(item.fechaGanado.timestamp),
-                    ] ).draw( false );
+    data = $.parseJSON(sessionStorage.getItem('ganados-familia-index'));
+    if (data == null){
+        getList(R_FAMILIA_INDEX + '/PRU-1986/index.json')
+            .done(function(response) {
+                // validateSession(data);
+                // $.each(data.resumen, function(i, item) {
+                //     $('#ganados-resumen-tipo-' + item.id).html(item.cantidad);
+                // });
+                if (response != null){
+                    llenarTabla(response);
                 }
+            })
+            .fail(function(dataFail) {
+            })
+            .always(function() {
+                $( "#table-loader" ).remove();
             });
-        })
-        .fail(function(dataFail) {
-        })
-        .always(function() {
-            $( "#table-loader" ).remove();
-        });
+    }
+    else{
+        $( "#table-loader" ).remove();
+        llenarTabla(data);
+    }
 
     $("#btn-registrar-familia").on('click', function(){
         loadModule('ganados','ganados','Nuevo');
     });
 
+    function llenarTabla(values){
+        sessionStorage.setItem('ganados-familia-index', JSON.stringify(values));
+        $.each(values.data, function(i, item) {
+            if (tablaActual != null){
+                tablaActual.row.add( [
+                    (i+1),
+                    '<input type="checkbox" id="familia-' + item.id + '">',
+                    item.nombre,
+                    item.integrantes
+                    // '<a id="persona_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'ganados\',\'ganados\',\'Editar\',' + item.id + ');">' + item.nombres + '</a>',
+                    // item.telefono,
+                    // item.correo,
+                    // item.metodoGanar.nombre,
+                    // getFecha(item.fechaGanado.timestamp),
+                ] ).draw( false );
+            }
+        });
+    }
+
+    $('#mi-modal').on('shown.bs.modal', function () {
+        // $('#myInput').focus()
+    })
 })();
