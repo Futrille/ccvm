@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    clearSessionStorage();
+    clearAllStorage();
     
 
     // var jqxhr = $.post( getRoute('homepage') , $('form[name=login]').serialize(), function(data, status, xhr) {
@@ -33,7 +33,7 @@
 
     function hacerClick(){
         $('ul.sidebar-menu > li').on('click', function(){
-            $.xhrPool.abortAll();
+            
             $.each($('ul.sidebar-menu > li'), function(i, item) {
                 $(item).removeClass('active');
             });

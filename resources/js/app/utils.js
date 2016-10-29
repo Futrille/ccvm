@@ -48,6 +48,8 @@ jQuery.cachedScript = function( url, options ) {
  */
 function loadModule(modulo, vista, accion, id, messageCode){
     try {
+        $.xhrPool.abortAll();
+
         if (id != null && id > 0) {
             setIdEntidad(id);
         }
@@ -65,7 +67,8 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 });
                 break;
             case 'Nuevo':
-                wrapper.load(getRoute('persona_new'), {
+                // wrapper.load(getRoute('persona_new'), {
+                wrapper.load("views/" + modulo + "/" + vista + accion + ".html", {
                     "apiKey": "77fa53ff60e8f41e40260b0dad826d76"
                 }, function (response, status, xhr) {
                     $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
@@ -122,6 +125,18 @@ function getList(url){
 }
 
 /**
+ * Consulta lista de datos desde el backend
+ * @param url
+ * @returns {*}
+ */
+function getBody(url){
+    $(document).ajaxStart(function() { Pace.restart(); });
+    var jqXHR = $.get(url,null,null,'html');
+    $.xhrPool.push(jqXHR);
+    return jqXHR;
+}
+
+/**
  *
  * @param data
  */
@@ -133,43 +148,34 @@ function validateSession(data){
     }
 }
 
-/**
- *
- * @param clave
- * @param defaultValue
- * @returns {*|string}
- */
-function getFromSessionStorage(clave, defaultValue){
-    if (defaultValue == null){
-        defaultValue = '-';
-    }
-    var preResultado = sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
-    if (preResultado != defaultValue){
-        var values = preResultado.split('-');
-        resultado = values[0];
-        if (($.now() - values[1]) / 1000 > MAX_SEG_SESSION){
-            resultado = defaultValue;
-            sessionStorage.removeItem(clave);
-        }
-    }
-    else{
-        resultado = preResultado;
-    }
-    return resultado;
+function getFromStorage(clave, defaultValue){
+    // if (defaultValue == null){
+    //     defaultValue = null;
+    // }
+    // var preResultado = sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
+    // if (preResultado != defaultValue){
+    //     var values = preResultado.split('-');
+    //     resultado = values[0];
+    //     if (($.now() - values[1]) / 1000 > MAX_SEG_SESSION){
+    //         resultado = defaultValue;
+    //         sessionStorage.removeItem(clave);
+    //     }
+    // }
+    // else{
+    //     resultado = preResultado;
+    // }
+    return sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
 }
 
-/**
- *
- * @param clave
- */
-function setToSessionStorage(clave, value){
-    sessionStorage.setItem(clave, value + '-' + $.now());
+function setToStorage(clave, valor){
+    sessionStorage.setItem(clave, valor);
 }
 
-/**
- *
- */
-function clearSessionStorage(){
+function removeStorage(clave){
+    sessionStorage.removeItem(clave);
+}
+
+function clearAllStorage(){
     sessionStorage.clear();
 }
 

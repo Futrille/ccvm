@@ -1,31 +1,40 @@
 (function() {
     'use strict';
-    var cantidad = getFromSessionStorage('cantidad', '-');
+    var codeSessionStorage = 'cantidad';
+    var cantidad = getFromStorage(codeSessionStorage, '-');
 
     if (cantidad == '-'){
         getList(getRoute('persona_count'))
-            .done(function (data) {
-                // validateSession(data);
+            .done(function (response) {
                 try {
-                    if (data != null) {
-                        cantidad = data.response;
-                        setToSessionStorage('cantidad', cantidad);
-                    }
+                    llenar(response.data);
                 }
                 catch (e) {
                     console.log("Error [Monitor/Index]: " + e.message);
                 }
             })
-            .fail(function (dataFail) {
-            })
-            .always(function () {
-                $('#ganados_cantidad').html(cantidad);
-            });
+            .fail(function (dataFail) {})
+            .always(function () {});
     }
     else{
         $('#ganados_cantidad').html(cantidad);
     }
 
+    function llenar(valores){
+        if (valores != null){
+            setToStorage(codeSessionStorage, valores);
+            $('#ganados_cantidad').html(valores);
+            iniciarEventos();
+        }
+        else{
+            removeStorage(codeSessionStorage);
+        }
+    }
+    
+    
+    function iniciarEventos(){
+        
+    }
     // $("#consultar-nivel-1").on('click', function(){
     //     loadModule('ganados','ganados','Index');
     // });

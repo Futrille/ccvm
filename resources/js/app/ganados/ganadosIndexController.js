@@ -37,16 +37,11 @@
         var time = date.substr(-2) + '/' + month.substr(-2) + '/' + year;
         return time;
     }
-    console.log('Session familia:',$.parseJSON(sessionStorage.getItem('ganados-familia-index')));
 
     data = $.parseJSON(sessionStorage.getItem('ganados-familia-index'));
     if (data == null){
         getList(R_FAMILIA_INDEX + '/PRU-1986/index.json')
             .done(function(response) {
-                // validateSession(data);
-                // $.each(data.resumen, function(i, item) {
-                //     $('#ganados-resumen-tipo-' + item.id).html(item.cantidad);
-                // });
                 if (response != null){
                     llenarTabla(response);
                 }
@@ -58,8 +53,8 @@
             });
     }
     else{
-        $( "#table-loader" ).remove();
         llenarTabla(data);
+        $( "#table-loader" ).remove();
     }
 
     $("#btn-registrar-familia").on('click', function(){
