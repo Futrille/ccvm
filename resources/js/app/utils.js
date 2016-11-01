@@ -1,6 +1,6 @@
 
 var MAX_SEG_SESSION = 20;
-
+var CLAVE = '20161028';
 $.xhrPool = [];
 $.xhrPool.abortAll = function() {
     $(this).each(function(i, jqXHR) {   //  cycle through list of recorded connection
@@ -149,9 +149,10 @@ function validateSession(data){
 }
 
 function getFromStorage(clave, defaultValue){
-    // if (defaultValue == null){
-    //     defaultValue = null;
-    // }
+    clave = $.Cypher("encriptar",clave+'',CLAVE);
+    if (defaultValue == undefined){
+        defaultValue = null;
+    }
     // var preResultado = sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
     // if (preResultado != defaultValue){
     //     var values = preResultado.split('-');
@@ -164,15 +165,15 @@ function getFromStorage(clave, defaultValue){
     // else{
     //     resultado = preResultado;
     // }
-    return sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
+    return sessionStorage.getItem(clave) != null ? $.Cypher("desencriptar",sessionStorage.getItem(clave),CLAVE)  : defaultValue;
 }
 
 function setToStorage(clave, valor){
-    sessionStorage.setItem(clave, valor);
+    sessionStorage.setItem($.Cypher("encriptar",clave+'',CLAVE), $.Cypher("encriptar",valor+'',CLAVE));
 }
 
 function removeStorage(clave){
-    sessionStorage.removeItem(clave);
+    sessionStorage.removeItem($.Cypher("encriptar",clave+'',CLAVE));
 }
 
 function clearAllStorage(){

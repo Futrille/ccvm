@@ -5,6 +5,7 @@
 
     var codeSessionStorage = 'ganados-familia-nuevo';
     var data = getFromStorage(codeSessionStorage);
+    console.log("encriptado:", $.Cypher("encriptar","DANIEL FUTRILLEDANIEL FUTRILLEDANIEL FUTRILLEDANIEL FUTRILLEDANIEL FUTRILLE","20161028"));
     if (data == null){
         getBody(getRoute('persona_new'))
         .done(function(response) { llenar(response); })
@@ -30,6 +31,7 @@
         catch(e){
             console.log('Error [Ganados/Nuevo]: ' + e.message);
         }
+        console.lg("LENNARS");
     }
 
     /**
@@ -59,7 +61,7 @@
             loadModule('ganados','ganados','Index');
         });
         // [name=persona]
-        $("form").submit(function(e) {
+        $("form[name=persona]").submit(function(e) {
             e.preventDefault();
             console.log("FormData:", $('form[name=persona]').serialize() + '&' + $('form[name=familia]').serialize());
             // var jqxhr = $.post( getRoute('persona_new') , $('form[name=persona]').serialize(), function(data, status, xhr) {

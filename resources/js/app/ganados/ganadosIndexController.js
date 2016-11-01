@@ -3,7 +3,7 @@
 
     setTitle('Familias Conectadas ');
     setTitleDescription('');
-
+    var codeStorage = 'ganados-familia-index';
     var tablaActual = null;
     var data = null;
     try{
@@ -38,7 +38,9 @@
         return time;
     }
 
-    data = $.parseJSON(sessionStorage.getItem('ganados-familia-index'));
+    console.log("ENCRYT:", getFromStorage(codeStorage));
+    console.log("ENCRYT:", sessionStorage.getItem(codeStorage));
+    data = $.parseJSON(getFromStorage(codeStorage));
     if (data == null){
         getList(R_FAMILIA_INDEX + '/PRU-1986/index.json')
             .done(function(response) {
@@ -62,7 +64,7 @@
     });
 
     function llenarTabla(values){
-        sessionStorage.setItem('ganados-familia-index', JSON.stringify(values));
+        setToStorage(codeStorage, JSON.stringify(values));
         $.each(values.data, function(i, item) {
             if (tablaActual != null){
                 tablaActual.row.add( [
