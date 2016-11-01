@@ -5,7 +5,7 @@
 
     var codeSessionStorage = 'ganados-familia-nuevo';
     var data = getFromStorage(codeSessionStorage);
-    console.log("encriptado:", $.Cypher("encriptar","DANIEL FUTRILLEDANIEL FUTRILLEDANIEL FUTRILLEDANIEL FUTRILLEDANIEL FUTRILLE","20161028"));
+
     if (data == null){
         getBody(getRoute('persona_new'))
         .done(function(response) { llenar(response); })
@@ -22,16 +22,15 @@
             if (valores != null){
                 setToStorage(codeSessionStorage, valores);
                 $('#form-ganados').html(valores);
-                iniciarEventos();
             }
             else{
                 removeStorage(codeSessionStorage);
             }
+            iniciarEventos();
         }
         catch(e){
             console.log('Error [Ganados/Nuevo]: ' + e.message);
         }
-        console.lg("LENNARS");
     }
 
     /**
@@ -54,35 +53,52 @@
 
 
     function iniciarEventos(){
+        try {
+            $('#btn-ganados-registrar-cancelar').click(function () {
+                setIdEntidad(0);
+                setMesageCode(MSG_NO_MESSAGE);
+                loadModule('ganados', 'ganados', 'Index');
+            });
 
-        $('#btn-ganados-registrar-cancelar').click(function(){
-            setIdEntidad(0);
-            setMesageCode(MSG_NO_MESSAGE);
-            loadModule('ganados','ganados','Index');
-        });
-        // [name=persona]
-        $("form[name=persona]").submit(function(e) {
-            e.preventDefault();
-            console.log("FormData:", $('form[name=persona]').serialize() + '&' + $('form[name=familia]').serialize());
-            // var jqxhr = $.post( getRoute('persona_new') , $('form[name=persona]').serialize(), function(data, status, xhr) {
-            //     // validateSession(data);
-            //     if (data != null && data.status != null && data.status == "error"){
-            //         // setMesageCode(MSG_SAVE_ERROR);
-            //         // printMessage(getMessageCode());
-            //     }
-            //     else {//if (data != null && data.status != null && data.status == "success"){
-            //         setIdEntidad(data.response.id);
-            //         // setMesageCode(MSG_SAVE_SUCCESS);
-            //         loadModule('ganados','ganados','Index');
-            //     }
-            // })
-            //     .done(function() {
-            //     })
-            //     .fail(function() {
-            //     })
-            //     .always(function() {
-            //     });
-        });
+            $("#btn-ganados-registrar-limpiar").on('click',function (e) {
+                e.preventDefault();
+                $('form').val('');
+                console.log("FormData LIMPIAR:", $('form[name=persona]').serialize() + '&' + $('form[name=familia]').serialize());
+            });
+
+            $("#btn-ganados-registrar-guardar").on('click',function (e) {
+                removeStorage('ganados-familia-index');
+                removeStorage('ganados-familia-nuevo');
+                e.preventDefault();
+                $('#form-ganados').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+                var jqxhr = $.post(
+                    getRoute('persona_new')
+                    , $('form[name=persona]').serialize() + '&' + $('form[name=familia]').serialize()
+                    , function(response, status, xhr) {
+                        llenar(response);
+                    // validateSession(data);
+                    // if (data != null && data.status != null && data.status == "error"){
+                    //     // setMesageCode(MSG_SAVE_ERROR);
+                    //     // printMessage(getMessageCode());
+                    // }
+                    // else {//if (data != null && data.status != null && data.status == "success"){
+                    //     setIdEntidad(data.response.id);
+                    //     // setMesageCode(MSG_SAVE_SUCCESS);
+                    //     loadModule('ganados','ganados','Index');
+                    // }
+                })
+                .done(function() {
+                })
+                .fail(function() {
+                })
+                .always(function() {
+                    $('#table-loader').remove();
+                });
+            });
+        }
+        catch(e){
+            console.log("Error [Ganados/Nuevo]: " + e.message);
+        }
     }
 
 })();

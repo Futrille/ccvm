@@ -1,6 +1,17 @@
 
-var MAX_SEG_SESSION = 20;
-var CLAVE = '20161028';
+
+var TITLE = '';
+var TITLE_DESCRIPTION = '';
+
+var APP = {
+    MAX_SEG_SESSION : 20
+
+    , cifrar : false
+    , clave : $.Cypher('en',(new Date()).getMilliseconds() + '',(new Date()).getMilliseconds() + '')
+
+    , idEntidad : 0
+};
+
 $.xhrPool = [];
 $.xhrPool.abortAll = function() {
     $(this).each(function(i, jqXHR) {   //  cycle through list of recorded connection
@@ -149,39 +160,53 @@ function validateSession(data){
 }
 
 function getFromStorage(clave, defaultValue){
-    clave = $.Cypher("encriptar",clave+'',CLAVE);
     if (defaultValue == undefined){
         defaultValue = null;
     }
-    // var preResultado = sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
-    // if (preResultado != defaultValue){
-    //     var values = preResultado.split('-');
-    //     resultado = values[0];
-    //     if (($.now() - values[1]) / 1000 > MAX_SEG_SESSION){
-    //         resultado = defaultValue;
-    //         sessionStorage.removeItem(clave);
-    //     }
-    // }
-    // else{
-    //     resultado = preResultado;
-    // }
-    return sessionStorage.getItem(clave) != null ? $.Cypher("desencriptar",sessionStorage.getItem(clave),CLAVE)  : defaultValue;
+    if (APP.cifrar){
+        clave = $.Cypher("en",clave+'',APP.clave);
+        // var preResultado = sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
+        // if (preResultado != defaultValue){
+        //     var values = preResultado.split('-');
+        //     resultado = values[0];
+        //     if (($.now() - values[1]) / 1000 > APP.MAX_SEG_SESSION){
+        //         resultado = defaultValue;
+        //         sessionStorage.removeItem(clave);
+        //     }
+        // }
+        // else{
+        //     resultado = preResultado;
+        // }
+        return sessionStorage.getItem(clave) != null ? $.Cypher("de",sessionStorage.getItem(clave),APP.clave)  : defaultValue;
+    }
+    else{
+        return sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave)  : defaultValue;
+    }
 }
 
 function setToStorage(clave, valor){
-    sessionStorage.setItem($.Cypher("encriptar",clave+'',CLAVE), $.Cypher("encriptar",valor+'',CLAVE));
+    if (APP.cifrar){
+        sessionStorage.setItem($.Cypher("en",clave+'',APP.clave), $.Cypher("en",valor+'',APP.clave));
+    }
+    else{
+        sessionStorage.setItem(clave, valor);
+    }
 }
 
 function removeStorage(clave){
-    sessionStorage.removeItem($.Cypher("encriptar",clave+'',CLAVE));
+    if (APP.cifrar){
+        sessionStorage.removeItem($.Cypher("en",clave+'',APP.clave));
+    }
+    else{
+        sessionStorage.removeItem(clave);
+    }
 }
 
 function clearAllStorage(){
     sessionStorage.clear();
 }
 
-var TITLE = '';
-var TITLE_DESCRIPTION = '';
+
 
 function setTitle(titulo){
     TITLE = titulo;

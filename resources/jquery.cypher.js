@@ -10,22 +10,22 @@
  Uso:
  
 Ligado al val de un elemento:
- $("#input").Cypher('encriptar',"llave"); 
+ $("#input").Cypher('en',"llave"); 
 
 Como retorno de datos:
- var textoDemo=$.Cypher("encriptar","mi cadena","miLlave")
+ var textoDemo=$.Cypher("en","mi cadena","miLlave")
 Ligado a un elemento pero especificando el texto a trabajar:
-  $("#texto").Cypher('encriptar',"texto","llave");
+  $("#texto").Cypher('en',"texto","llave");
  
 Metodos:
-Cypher('encriptar',"texto","llave");
-Cypher('desencriptar',"texto","llave");
+Cypher('en',"texto","llave");
+Cypher('de',"texto","llave");
 
 */
 
 (function($) {
     var methods = {
-        encriptar: function(texto, llave) {
+        en: function(texto, llave) {
             var key = 0;
             for (var k = 0; k < llave.length; k++) {
                 keychar = llave.substr(k, 1);
@@ -40,7 +40,7 @@ Cypher('desencriptar',"texto","llave");
             }
             return window.btoa(newTexto)
         },
-        desencriptar: function(text, llave) {
+        de: function(text, llave) {
             var key = 0;
             for (var k = 0; k < llave.length; k++) {
                 keychar = llave.substr(k, 1);

@@ -38,8 +38,6 @@
         return time;
     }
 
-    console.log("ENCRYT:", getFromStorage(codeStorage));
-    console.log("ENCRYT:", sessionStorage.getItem(codeStorage));
     data = $.parseJSON(getFromStorage(codeStorage));
     if (data == null){
         getList(R_FAMILIA_INDEX + '/PRU-1986/index.json')
