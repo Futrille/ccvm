@@ -38,7 +38,7 @@
         return time;
     }
 
-    data = $.parseJSON(getFromStorage(codeStorage));
+    data = $.parseJSON(APP.storage.get(codeStorage));
     if (data == null){
         getList(R_FAMILIA_INDEX + '/PRU-1986/index.json')
             .done(function(response) {
@@ -62,7 +62,7 @@
     });
 
     function llenarTabla(values){
-        setToStorage(codeStorage, JSON.stringify(values));
+        APP.storage.set(codeStorage, JSON.stringify(values));
         $.each(values.data, function(i, item) {
             if (tablaActual != null){
                 tablaActual.row.add( [

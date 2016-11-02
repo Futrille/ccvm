@@ -6,10 +6,9 @@ var TITLE_DESCRIPTION = '';
 var APP = {
     MAX_SEG_SESSION : 20
 
-    , cifrar : false
-    , clave : $.Cypher('en',(new Date()).getMilliseconds() + '',(new Date()).getMilliseconds() + '')
-
     , idEntidad : 0
+    , useStorage: true
+    , storage: new AppStorage()
 };
 
 $.xhrPool = [];
@@ -159,52 +158,56 @@ function validateSession(data){
     }
 }
 
-function getFromStorage(clave, defaultValue){
-    if (defaultValue == undefined){
-        defaultValue = null;
-    }
-    if (APP.cifrar){
-        clave = $.Cypher("en",clave+'',APP.clave);
-        // var preResultado = sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
-        // if (preResultado != defaultValue){
-        //     var values = preResultado.split('-');
-        //     resultado = values[0];
-        //     if (($.now() - values[1]) / 1000 > APP.MAX_SEG_SESSION){
-        //         resultado = defaultValue;
-        //         sessionStorage.removeItem(clave);
-        //     }
-        // }
-        // else{
-        //     resultado = preResultado;
-        // }
-        return sessionStorage.getItem(clave) != null ? $.Cypher("de",sessionStorage.getItem(clave),APP.clave)  : defaultValue;
-    }
-    else{
-        return sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave)  : defaultValue;
-    }
-}
+// function getFromStorage(clave, defaultValue){
+//     // console.log("Storage.get:", APP.storage.get(clave, defaultValue));
+//     if (defaultValue == undefined){
+//         defaultValue = null;
+//     }
+//     if (APP.cifrar){
+//         clave = $.Cypher("en",clave+'',APP.clave);
+//         // var preResultado = sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
+//         // if (preResultado != defaultValue){
+//         //     var values = preResultado.split('-');
+//         //     resultado = values[0];
+//         //     if (($.now() - values[1]) / 1000 > APP.MAX_SEG_SESSION){
+//         //         resultado = defaultValue;
+//         //         sessionStorage.removeItem(clave);
+//         //     }
+//         // }
+//         // else{
+//         //     resultado = preResultado;
+//         // }
+//         return sessionStorage.getItem(clave) != null ? $.Cypher("de",sessionStorage.getItem(clave),APP.clave)  : defaultValue;
+//     }
+//     else{
+//         return sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave)  : defaultValue;
+//     }
+// }
 
-function setToStorage(clave, valor){
-    if (APP.cifrar){
-        sessionStorage.setItem($.Cypher("en",clave+'',APP.clave), $.Cypher("en",valor+'',APP.clave));
-    }
-    else{
-        sessionStorage.setItem(clave, valor);
-    }
-}
+// function setToStorage(clave, valor){
+//     // console.log("Storage.set:", APP.storage.set(clave, valor));
+//     if (APP.cifrar){
+//         sessionStorage.setItem($.Cypher("en",clave+'',APP.clave), $.Cypher("en",valor+'',APP.clave));
+//     }
+//     else{
+//         sessionStorage.setItem(clave, valor);
+//     }
+// }
 
-function removeStorage(clave){
-    if (APP.cifrar){
-        sessionStorage.removeItem($.Cypher("en",clave+'',APP.clave));
-    }
-    else{
-        sessionStorage.removeItem(clave);
-    }
-}
+// function removeStorage(clave){
+//     // console.log("Storage.remove:", APP.storage.remove(clave));
+//     if (APP.cifrar){
+//         sessionStorage.removeItem($.Cypher("en",clave+'',APP.clave));
+//     }
+//     else{
+//         sessionStorage.removeItem(clave);
+//     }
+// }
 
-function clearAllStorage(){
-    sessionStorage.clear();
-}
+// function clearAllStorage(){
+//     console.log("Storage.removeAll:", APP.storage.removeAll());
+//     sessionStorage.clear();
+// }
 
 
 

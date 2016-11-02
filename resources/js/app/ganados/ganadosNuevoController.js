@@ -4,7 +4,7 @@
     setTitleDescription(" Ingrese los datos de la Familia Conectada.");
 
     var codeSessionStorage = 'ganados-familia-nuevo';
-    var data = getFromStorage(codeSessionStorage);
+    var data = APP.storage.get(codeSessionStorage);
 
     if (data == null){
         getBody(getRoute('persona_new'))
@@ -23,19 +23,19 @@
     function llenar(valores){
         try{
             if (valores != null){
-                setToStorage(codeSessionStorage, valores);
+                APP.storage.set(codeSessionStorage, valores);
                 // valores = $.parseHTML(valores);
                 $('#form-ganados').html(valores);
-                console.log("console.laaaaa");
                 $('#form-ganados').ready(function(){
-                    $('span.help-block').each(function(i,el){
-                        console.log("Elemento:", el);
-                    });
                     $('span.help-block').parent('.form-group').addClass('has-error');
+                    $('div.has-error').children('.control-label').each(function(i,el){
+                        console.log("valores: ", el);
+                    });
+                    // $('div.has-error').children('.control-label').append('<i class="fa fa-times-circle-o"></i>');
                 });
             }
             else{
-                removeStorage(codeSessionStorage);
+                APP.storage.remove(codeSessionStorage);
             }
             iniciarEventos();
         }
@@ -78,8 +78,8 @@
             });
 
             $("#btn-ganados-registrar-guardar").on('click',function (e) {
-                removeStorage('ganados-familia-index');
-                removeStorage('ganados-familia-nuevo');
+                APP.storage.remove('ganados-familia-index');
+                APP.storage.remove('ganados-familia-nuevo');
                 e.preventDefault();
                 $('#form-ganados').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
                 var jqxhr = $.post(

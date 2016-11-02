@@ -2,7 +2,7 @@
     'use strict';
     try {
         var codeSessionStorage = 'cantidad';
-        var cantidad = getFromStorage(codeSessionStorage, '-');
+        var cantidad = APP.storage.get(codeSessionStorage, '-');
 
         if (cantidad == '-') {
             getList(getRoute('persona_count'))
@@ -28,12 +28,12 @@
     }
     function llenar(valores){
         if (valores != null){
-            setToStorage(codeSessionStorage, valores);
+            APP.storage.set(codeSessionStorage, valores);
             $('#ganados_cantidad').html(valores);
             iniciarEventos();
         }
         else{
-            removeStorage(codeSessionStorage);
+            APP.storage.remove(codeSessionStorage);
         }
     }
     

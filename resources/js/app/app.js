@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    clearAllStorage();
+    APP.storage.removeAll();
     
 
     // var jqxhr = $.post( getRoute('homepage') , $('form[name=login]').serialize(), function(data, status, xhr) {
