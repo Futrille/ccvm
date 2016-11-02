@@ -2,7 +2,17 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Niveles</h3>
+                <div class="btn-group">
+                    <button id="btn-registrar-nivel" type="button" class="btn btn-primary">Registrar</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Menu desplegable</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="javascript:void(0);" data-toggle="modal" data-target="#myModal">Eliminar Seleccionado</a></li>
+                    </ul>
+                </div>
+                <!--<h3 class="box-title">Niveles</h3>-->
             </div>
             <div class="box-body">
                 <table id="nivel-main-table" class="table table-hover">
@@ -23,6 +33,20 @@
             </div>
             <div id="table-loader" class="overlay">
                 <i class="fa fa-refresh fa-spin"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                Est&aacute; de Eliminar el(los) elemento(s) seleccionado(s)?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-default">Eliminar</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>

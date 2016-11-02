@@ -4,9 +4,11 @@
 (function() {
     'use strict';
 
-    var tablaActual2 = null;
+    setTitle('Niveles ');
+    setTitleDescription('');
+    var tablaActual = null;
     try{
-        tablaActual2 = $("#nivel-main-table").DataTable({
+        tablaActual = $("#nivel-main-table").DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": true,
@@ -24,27 +26,19 @@
     getList(R_NIVEL_INDEX + '/PRU-1986/index.json')
         .done(function(response) {
             console.log(response);
-            // validateSession(data);
-            // $.each(data.resumen, function(i, item) {
-            //     $('#ganados-resumen-tipo-' + item.id).html(item.cantidad);
-            // });
-            //
             $.each(response.data, function(i, item) {
                 console.log(item);
-                  if (tablaActual2 != null){
-                    tablaActual2.row.add( [
-                        'combobox',
-                        'acciones',
+                if (tablaActual != null){
+                    tablaActual.row.add( [
+                        '<input type="checkbox" id="nivel-' + item.id + '">',
+                        '<a id="nivel-add-' + item.id + '" style="margin-right: 10%;" href="#"><i class="fa fa-plus-square"></i></a>' +
+                        '<a id="nivel-delete-' + item.id + '" href="#"><i class="fa fa-minus"></i></a>',
                         item.orden,
                         (item.padre != null ? "-------"+item.nombre : item.nombre),
                         item.idTipo.nombre,
                         item.idEstatus.nombre,
-                        'mover'
-                        // '<a id="persona_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'ganados\',\'ganados\',\'Editar\',' + item.id + ');">' + item.nombres + '</a>',
-                        // item.telefono,
-                        // item.correo,
-                        // item.metodoGanar.nombre,
-                        // getFecha(item.fechaGanado.timestamp),
+                        '<a id="nivel-up-' + item.id + '" style="margin-right: 10%;" href="#"><i class="fa fa-arrow-circle-up"></i></a>' +
+                        '<a id="nivel-down-' + item.id + '" href="#"><i class="fa fa-arrow-circle-down"></i></a>',
                     ] ).draw( false );
                 }
             });
@@ -54,6 +48,10 @@
         .always(function() {
             $( "#table-loader" ).remove();
         });
+
+    $("#btn-registrar-nivel").on('click', function(){
+        loadModule('nivel','nivel','Nuevo');
+    });
 
 
 })();
