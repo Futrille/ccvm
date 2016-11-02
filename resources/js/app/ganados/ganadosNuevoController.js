@@ -9,7 +9,10 @@
     if (data == null){
         getBody(getRoute('persona_new'))
         .done(function(response) { llenar(response); })
-        .fail(function(dataFail) {})
+        .fail(function(dataFail) {
+            console.log("FAIL: ", dataFail);
+            loadModule('ganados', 'ganados', 'Index');
+        })
         .always(function() {});
     }
     else{
@@ -21,7 +24,15 @@
         try{
             if (valores != null){
                 setToStorage(codeSessionStorage, valores);
+                // valores = $.parseHTML(valores);
                 $('#form-ganados').html(valores);
+                console.log("console.laaaaa");
+                $('#form-ganados').ready(function(){
+                    $('span.help-block').each(function(i,el){
+                        console.log("Elemento:", el);
+                    });
+                    $('span.help-block').parent('.form-group').addClass('has-error');
+                });
             }
             else{
                 removeStorage(codeSessionStorage);
