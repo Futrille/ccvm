@@ -8,7 +8,12 @@
 
     if (data == null){
         getBody(getRoute('persona_new'))
-        .done(function(response) { llenar(response); })
+        .done(function(response) {
+
+            console.log("Response:", $.parseHTML(response.data));
+            console.log("ResponseData:", response.data);
+            llenar(response.data);
+        })
         .fail(function(dataFail) {
             console.log("FAIL: ", dataFail);
             loadModule('ganados', 'ganados', 'Index');
@@ -25,6 +30,7 @@
             if (valores != null){
                 APP.storage.set(codeSessionStorage, valores);
                 // valores = $.parseHTML(valores);
+                console.log("HTML:",valores);
                 $('#form-ganados').html(valores);
                 $('#form-ganados').ready(function(){
                     $('span.help-block').parent('.form-group').addClass('has-error');
@@ -78,9 +84,9 @@
             });
 
             $("#btn-ganados-registrar-guardar").on('click',function (e) {
+                e.preventDefault();
                 APP.storage.remove('ganados-familia-index');
                 APP.storage.remove('ganados-familia-nuevo');
-                e.preventDefault();
                 $('#form-ganados').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
                 var jqxhr = $.post(
                     getRoute('persona_new')
