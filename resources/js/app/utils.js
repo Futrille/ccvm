@@ -60,7 +60,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
     try {
         $.xhrPool.abortAll();
 
-        if (id != null && id > 0) {
+        if (id != undefined && id != null && id > 0) {
             setIdEntidad(id);
         }
 

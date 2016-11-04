@@ -68,13 +68,12 @@
                 tablaActual.row.add( [
                     (i+1),
                     '<input type="checkbox" id="familia-' + item.id + '">',
-                    item.nombre,
-                    item.integrantes
-                    // '<a id="persona_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'ganados\',\'ganados\',\'Editar\',' + item.id + ');">' + item.nombres + '</a>',
+                    '<a id="familia_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'ganados\',\'ganados\',\'Nuevo\',' + item.id + ');">' + item.nombre + '</a>',
+                    item.integrantes,
                     // item.telefono,
                     // item.correo,
                     // item.metodoGanar.nombre,
-                    // getFecha(item.fechaGanado.timestamp),
+                    // getFecha(item.fechaGanado.timestamp)
                 ] ).draw( false );
             }
         });

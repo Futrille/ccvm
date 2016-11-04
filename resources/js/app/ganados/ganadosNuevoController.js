@@ -9,10 +9,10 @@
     if (data == null){
         getBody(getRoute('persona_new'))
         .done(function(response) {
-
-            console.log("Response:", $.parseHTML(response.data));
-            console.log("ResponseData:", response.data);
-            llenar(response.data);
+            response = $.parseJSON(response);
+            if(response != null){
+                cargarFormulario((response.data));
+            }
         })
         .fail(function(dataFail) {
             console.log("FAIL: ", dataFail);
@@ -21,23 +21,21 @@
         .always(function() {});
     }
     else{
-        llenar(data);
+        cargarFormulario(data);
         actualizarToken();
     }
 
-    function llenar(valores){
+    function cargarFormulario(valores, guardarStorage){
         try{
             if (valores != null){
-                APP.storage.set(codeSessionStorage, valores);
-                // valores = $.parseHTML(valores);
-                console.log("HTML:",valores);
                 $('#form-ganados').html(valores);
+                valores = $('#form-ganados').html();
+                APP.storage.set(codeSessionStorage, valores + '');
                 $('#form-ganados').ready(function(){
                     $('span.help-block').parent('.form-group').addClass('has-error');
-                    $('div.has-error').children('.control-label').each(function(i,el){
-                        console.log("valores: ", el);
-                    });
-                    // $('div.has-error').children('.control-label').append('<i class="fa fa-times-circle-o"></i>');
+                    if ( $('.has-error').length > 0 ){
+                        APP.storage.remove(codeSessionStorage);
+                    }
                 });
             }
             else{
@@ -80,7 +78,6 @@
             $("#btn-ganados-registrar-limpiar").on('click',function (e) {
                 e.preventDefault();
                 $('form').val('');
-                console.log("FormData LIMPIAR:", $('form[name=persona]').serialize() + '&' + $('form[name=familia]').serialize());
             });
 
             $("#btn-ganados-registrar-guardar").on('click',function (e) {
@@ -91,8 +88,11 @@
                 var jqxhr = $.post(
                     getRoute('persona_new')
                     , $('form[name=persona]').serialize() + '&' + $('form[name=familia]').serialize()
-                    , function(response, status, xhr) {
-                        llenar(response);
+                    , function(response) {
+                        // response = $.parseJSON(response);
+                        if(response != null){
+                            cargarFormulario($.parseHTML(response.data), false);
+                        }
                     // validateSession(data);
                     // if (data != null && data.status != null && data.status == "error"){
                     //     // setMesageCode(MSG_SAVE_ERROR);
@@ -107,6 +107,7 @@
                 .done(function() {
                 })
                 .fail(function() {
+                    $('#table-loader').remove();
                 })
                 .always(function() {
                     $('#table-loader').remove();
