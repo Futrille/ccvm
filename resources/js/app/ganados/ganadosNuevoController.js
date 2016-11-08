@@ -4,12 +4,19 @@
     setTitleDescription(" Ingrese los datos de la Familia Conectada.");
 
     var codeSessionStorage = 'ganados-familia-nuevo';
-    var data = APP.storage.get(codeSessionStorage);
+    var data = null;
+    if (getIdEntidad() == 0){
+        data = APP.storage.get(codeSessionStorage);
+    }
+    else{
+        APP.storage.remove(codeSessionStorage);
+    }
 
     if (data == null){
-        getBody(getRoute('persona_new'))
+        getBody(getRoute('persona_new', getIdEntidad()))
         .done(function(response) {
             response = $.parseJSON(response);
+            console.log("data de back:", response);
             if(response != null){
                 cargarFormulario((response.data));
             }
@@ -86,7 +93,7 @@
                 APP.storage.remove('ganados-familia-nuevo');
                 $('#form-ganados').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
                 var jqxhr = $.post(
-                    getRoute('persona_new')
+                    getRoute('persona_new', getIdEntidad())
                     , $('form[name=persona]').serialize() + '&' + $('form[name=familia]').serialize()
                     , function(response) {
                         // response = $.parseJSON(response);

@@ -63,6 +63,9 @@ function loadModule(modulo, vista, accion, id, messageCode){
         if (id != undefined && id != null && id > 0) {
             setIdEntidad(id);
         }
+        else{
+            setIdEntidad(0);
+        }
 
         var wrapper = $("#page-wrapper");
         switch (accion) {

@@ -46,10 +46,10 @@ function getRoute(nameRoute, id){
             route = route + '/persona/';
             break;
         case 'persona_new':
-            route = route + '/persona/new';
-            break;
-        case 'persona_edit':
-            route = route + '/persona/' + getIdEntidad() + '/edit';
+            // route = route + '/persona/new';
+            // break;
+        // case 'persona_edit':
+            route = route + '/persona/new/' + getIdEntidad();
             break;
         case 'persona_delete':
             route = route + '/persona/' + getIdEntidad() + '/delete';
