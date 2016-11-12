@@ -53,5 +53,30 @@
         loadModule('nivel','nivel','Nuevo');
     });
 
-
 })();
+
+function agregarNivel() {
+    var url = R_NIVEL_INDEX + '/new/PRU-1986/index.json';
+    var headers = {
+        'color': 'blue',
+        'nombre': 'nombre',
+        // 'nivelpadre': '',
+        'icono': 'heart',
+        'tipo': 'Clase',
+        'estatus': 'Inactivo'
+    };
+
+    $.ajax({
+        url: url+"?XDEBUG_SESSION_START=14272",
+        type: 'POST',
+        dataType: 'json',
+        headers: headers,
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            console.log(data)
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
