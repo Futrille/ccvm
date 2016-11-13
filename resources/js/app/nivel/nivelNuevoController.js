@@ -4,6 +4,7 @@
 var cont = 0;
 var contTotal;
 var idPadre = null;
+var nivelEditId = null;
 (function() {
     'use strict';
 
@@ -16,9 +17,15 @@ var idPadre = null;
         contTotal=3;
     }
 
-    setTitle('Registrar Nivel');
-
+    if(window.sessionStorage.getItem("nivelEditId")!=null){
+        setTitle('Editar Nivel');
+        nivelEditId=window.sessionStorage.getItem("nivelEditId");
+        window.sessionStorage.removeItem("nivelEditId");
+    }else{
+        setTitle('Registrar Nivel');
+    }
     setTitleDescription(" Ingrese los datos del nivel nuevo.");
+
     setValoresVariables($("#nivIconos"), 'nivel_icono');
     setValoresVariables($("#nivEstatus"), 'nivel_estatus');
     setValoresVariables($("#nivTipo"), 'nivel_tipo');
@@ -81,8 +88,12 @@ function setPadre(id) {
 
 function setCont() {
     cont++;
-    if(cont==3){
-        $('#table-loader').remove();
+    if(cont==contTotal){
+        if(nivelEditId!=null){
+            setNivel(nivelEditId);
+        }else{
+            $('#table-loader').remove();
+        }
     }
 }
 
@@ -113,13 +124,74 @@ function guardarNivel() {
     });
 }
 
+function actualizarNivel() {
+    var url = R_NIVEL_INDEX + '/PRU-1986/index.json';
+    var headers = {
+        'id':nivelEditId,
+        'color': $('#nivColor').val(),
+        'nombre': $('#nivNombre').val(),
+        'nivelpadre': idPadre,
+        'icono': $("#nivIconos option:selected").text(),
+        'tipo': $("#nivTipo option:selected").text(),
+        'estatus': $("#nivEstatus option:selected").text()
+    };
+
+    $.ajax({
+        url: url,
+        type: 'PUT',
+        dataType: 'json',
+        headers: headers,
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            console.log(data);
+            loadModule('nivel','nivel','Index');
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+function setNivel(id) {
+    $.ajax({
+        url: R_NIVEL_INDEX + '/PRU-1986/index.json',
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+            'idNivel': id
+        },
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            if(data.data[0].padre !=null){
+                $('#nivSuperior').val(data.data[0].padre.nombre);
+                idPadre = data.data[0].padre.id;
+            }
+            console.log(idPadre);
+            $('#nivColor').val(data.data[0].color);
+            $('#nivIconos').val(data.data[0].idIcono.id);
+            $('#nivNombre').val(data.data[0].nombre);
+            $('#nivEstatus').val(data.data[0].idEstatus.id);
+            $('#nivTipo').val(data.data[0].idTipo.id);
+
+            $('#table-loader').remove();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
 $("#btn-nivel-registrar-cancelar").on('click', function(){
     loadModule('nivel','nivel','Index');
 });
 
 $("#btn-nivel-registrar-guardar").on('click', function(){
     if(validate()){
-        guardarNivel();
+        if(nivelEditId!=null){
+            actualizarNivel();
+        }else{
+            guardarNivel();
+        }
     }else{
         alert("Debe llenar todos los campos");
     }

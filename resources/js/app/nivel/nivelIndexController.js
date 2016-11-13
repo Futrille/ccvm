@@ -117,5 +117,6 @@ function cambiarNivel(id) {
 }
 
 function editarNivel(id) {
-    alert(id.split("-")[2]);
+    window.sessionStorage.setItem("nivelEditId", id.split("-")[2]);
+    loadModule('nivel','nivel','Nuevo');
 }
