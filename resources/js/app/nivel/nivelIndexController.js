@@ -25,16 +25,18 @@
 
     getList(R_NIVEL_INDEX + '/PRU-1986/index.json')
         .done(function(response) {
-            console.log(response);
+            var idAdd="'nivel-add-";
+            var idDelete = "'nivel-delete-";
             $.each(response.data, function(i, item) {
-                console.log(item);
                 if (tablaActual != null){
-                    var idAdd="nivel-add-";
-                    var idDelete = "nivel-delete-";
+                    //console.log(item);
+                    idAdd+=item.id+"'";
+                    idDelete+=item.id+"'";
+
                     tablaActual.row.add( [
                         '<input type="checkbox" id="nivel-' + item.id + '">',
-                        (item.padre != null ? '<a id="nivel-delete-' + item.id + '" href="#" onclick="borrarNivel(idDelete+item.id)"><i class="fa fa-minus"></i></a>' : '<a id="nivel-add-' + item.id + '" style="margin-right: 10%;" href="#"><i class="fa fa-plus-square"></i></a>' +
-                        '<a id="nivel-delete-' + item.id + '" href="#"><i class="fa fa-minus"></i></a>'),
+                        (item.padre != null ? '<a id="' +idDelete+ '" href="#" onclick="borrarNivel('+idDelete+')"><i class="fa fa-minus"></i></a>' : '<a id="' +idAdd+ '" style="margin-right: 10%;" href="#" onclick="agregarNivel('+idDelete+')"><i class="fa fa-plus-square"></i></a>' +
+                        '<a id="' +idDelete+ '" href="#" onclick="borrarNivel('+idDelete+')"><i class="fa fa-minus"></i></a>'),
                         item.orden,
                         (item.padre != null ? "-------"+item.nombre : item.nombre),
                         item.idTipo.nombre,
@@ -43,6 +45,8 @@
                         '<a id="nivel-down-' + item.id + '" href="#"><i class="fa fa-arrow-circle-down"></i></a>',
                     ] ).draw( false );
                 }
+                idAdd="'nivel-add-";
+                idDelete = "'nivel-delete-";
             });
         })
         .fail(function(dataFail) {
@@ -55,3 +59,12 @@
         loadModule('nivel','nivel','Nuevo');
     });
 })();
+
+function borrarNivel(id) {
+    alert(id.split("-")[2]);
+}
+
+function agregarNivel(id) {
+    window.sessionStorage.setItem("idPadre", id.split("-")[2]);
+    loadModule('nivel','nivel','Nuevo');
+}
