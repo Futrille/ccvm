@@ -29,6 +29,7 @@
             var idDelete = "'nivel-delete-";
             var idUp = "'nivel-up-";
             var idDown = "'nivel-down-";
+            var idEdit = "'nivel-edit-";
             $.each(response.data, function(i, item) {
                 if (tablaActual != null){
                     //console.log(item);
@@ -36,23 +37,25 @@
                     idDelete+=item.id+"'";
                     idUp+=item.id+"'";
                     idDown+=item.id+"'";
+                    idEdit+=item.id+"'";
 
                     tablaActual.row.add( [
                         '<input type="checkbox" id="nivel-' + item.id + '">',
                         (item.padre != null ? '<a id="' +idDelete+ '" href="#" onclick="borrarNivel('+idDelete+')"><i class="fa fa-minus"></i></a>' : '<a id="' +idAdd+ '" style="margin-right: 10%;" href="#" onclick="agregarNivel('+idDelete+')"><i class="fa fa-plus-square"></i></a>' +
-                        '<a id="' +idDelete+ '" href="#" onclick="borrarNivel('+idDelete+')"><i class="fa fa-minus"></i></a>'),
+                        '<a id="' +idDelete+ '" href="#" onclick="borrarNivel('+idDelete+')"><i class="fa fa-minus"></i></a>')+'<a id="' +idEdit+ '" style="margin-left: 10%;" href="#" onclick="editarNivel('+idEdit+')"><i class="fa fa-pencil"></i></a>',
                         item.orden,
                         (item.padre != null ? "-------"+item.nombre : item.nombre),
                         item.idTipo.nombre,
                         item.idEstatus.nombre,
-                        '<a id="' +idUp+ '" style="margin-right: 10%;" href="#"  onclick="cambiarNivel('+idUp+')"><i class="fa fa-arrow-circle-up"></i></a>' +
-                        '<a id="' +idDown+ '" href="#" onclick="cambiarNivel('+idDown+')"><i class="fa fa-arrow-circle-down"></i></a>',
+                        (item.orden != 1 ? '<a id="' +idUp+ '" style="margin-right: 10%;" href="#"  onclick="cambiarNivel('+idUp+')"><i class="fa fa-arrow-circle-up"></i></a>' +
+                        '<a id="' +idDown+ '" href="#" onclick="cambiarNivel('+idDown+')"><i class="fa fa-arrow-circle-down"></i></a>' : '<a id="' +idDown+ '" href="#" onclick="cambiarNivel('+idDown+')"><i class="fa fa-arrow-circle-down"></i></a>'),
                     ] ).draw( false );
                 }
                 idAdd="'nivel-add-";
                 idDelete = "'nivel-delete-";
                 idUp = "'nivel-up-";
                 idDown = "'nivel-down-";
+                idEdit = "'nivel-edit-";
             });
         })
         .fail(function(dataFail) {
@@ -111,4 +114,8 @@ function cambiarNivel(id) {
             console.log(error);
         }
     });
+}
+
+function editarNivel(id) {
+    alert(id.split("-")[2]);
 }
