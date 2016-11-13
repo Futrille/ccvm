@@ -28,6 +28,7 @@ ROUTE = {
 var R_PERSONA_COUNT = module + web + ENV + '/persona/count';
 var R_FAMILIA_INDEX = module + web + ENV + '/familia';
 var R_NIVEL_INDEX = module + web + ENV + '/nivel';
+var R_VALORVARIABLE_INDEX = module + web + ENV + '/general/valorvariable';
 
 function getIdEntidad(){
     return app.idEntidad;

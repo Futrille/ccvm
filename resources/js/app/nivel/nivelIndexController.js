@@ -29,10 +29,12 @@
             $.each(response.data, function(i, item) {
                 console.log(item);
                 if (tablaActual != null){
+                    var idAdd="nivel-add-";
+                    var idDelete = "nivel-delete-";
                     tablaActual.row.add( [
                         '<input type="checkbox" id="nivel-' + item.id + '">',
-                        '<a id="nivel-add-' + item.id + '" style="margin-right: 10%;" href="#"><i class="fa fa-plus-square"></i></a>' +
-                        '<a id="nivel-delete-' + item.id + '" href="#"><i class="fa fa-minus"></i></a>',
+                        (item.padre != null ? '<a id="nivel-delete-' + item.id + '" href="#" onclick="borrarNivel(idDelete+item.id)"><i class="fa fa-minus"></i></a>' : '<a id="nivel-add-' + item.id + '" style="margin-right: 10%;" href="#"><i class="fa fa-plus-square"></i></a>' +
+                        '<a id="nivel-delete-' + item.id + '" href="#"><i class="fa fa-minus"></i></a>'),
                         item.orden,
                         (item.padre != null ? "-------"+item.nombre : item.nombre),
                         item.idTipo.nombre,
@@ -52,31 +54,4 @@
     $("#btn-registrar-nivel").on('click', function(){
         loadModule('nivel','nivel','Nuevo');
     });
-
 })();
-
-function agregarNivel() {
-    var url = R_NIVEL_INDEX + '/new/PRU-1986/index.json';
-    var headers = {
-        'color': 'blue',
-        'nombre': 'nombre',
-        // 'nivelpadre': '',
-        'icono': 'heart',
-        'tipo': 'Clase',
-        'estatus': 'Inactivo'
-    };
-
-    $.ajax({
-        url: url+"?XDEBUG_SESSION_START=14272",
-        type: 'POST',
-        dataType: 'json',
-        headers: headers,
-        contentType: 'application/json; charset=utf-8',
-        success: function (data) {
-            console.log(data)
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-}
