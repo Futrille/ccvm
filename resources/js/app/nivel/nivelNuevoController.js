@@ -9,7 +9,7 @@ var nivelEditId = null;
     'use strict';
 
     if(window.sessionStorage.getItem("idPadre")!=null){
-        contTotal =4;
+        contTotal=4;
         idPadre=window.sessionStorage.getItem("idPadre");
         window.sessionStorage.removeItem("idPadre");
         setPadre(idPadre);
@@ -21,10 +21,11 @@ var nivelEditId = null;
         setTitle('Editar Nivel');
         nivelEditId=window.sessionStorage.getItem("nivelEditId");
         window.sessionStorage.removeItem("nivelEditId");
+        setTitleDescription(" Ingrese los datos del nivel.");
     }else{
         setTitle('Registrar Nivel');
+        setTitleDescription(" Ingrese los datos del nivel nuevo.");
     }
-    setTitleDescription(" Ingrese los datos del nivel nuevo.");
 
     setValoresVariables($("#nivIconos"), 'nivel_icono');
     setValoresVariables($("#nivEstatus"), 'nivel_estatus');
@@ -32,13 +33,12 @@ var nivelEditId = null;
 })();
 
 function validate() {
-    if($('#nivColor').val()==''){
-        return false;
-    }
-    if($('#nivNombre').val()==''){
-        return false;
-    }
-    return true;
+    return !($('#nivColor').val() == '' || $('#nivNombre').val() == '');
+}
+
+function clear() {
+    $('#nivColor').val('');
+    $('#nivNombre').val('');
 }
 
 function setValoresVariables(select, codigo){
@@ -79,6 +79,7 @@ function setPadre(id) {
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
             $('#nivSuperior').val(data.data[0].nombre);
+            setCont();
         },
         error: function (error) {
             console.log(error);
