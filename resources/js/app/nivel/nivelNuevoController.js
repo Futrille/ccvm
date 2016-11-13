@@ -98,7 +98,7 @@ function guardarNivel() {
     };
 
     $.ajax({
-        url: url+"?XDEBUG_SESSION_START=19215",
+        url: url,
         type: 'POST',
         dataType: 'json',
         headers: headers,
