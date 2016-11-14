@@ -32,23 +32,26 @@
             var idEdit = "'nivel-edit-";
             $.each(response.data, function(i, item) {
                 if (tablaActual != null){
-                    //console.log(item);
                     idAdd+=item.id+"'";
                     idDelete+=item.id+"'";
                     idUp+=item.id+"'";
                     idDown+=item.id+"'";
                     idEdit+=item.id+"'";
 
+                    var linkBorrarNivel = '<a id="' +idDelete+ '" href="#" onclick="borrarNivel('+idDelete+')"><i class="fa fa-minus"></i></a>';
+                    var linkAgregarNivel = '<a id="' +idAdd+ '" style="margin-right: 10%;" href="#" onclick="agregarNivel('+idDelete+')"><i class="fa fa-plus-square"></i></a>';
+                    var linkEditarNivel = '<a id="' +idEdit+ '" style="margin-left: 10%;" href="#" onclick="editarNivel('+idEdit+')"><i class="fa fa-pencil"></i></a>';
+                    var linkCambiarOrdenUp = '<a id="' +idUp+ '" style="margin-right: 10%;" href="#"  onclick="cambiarNivel('+idUp+')"><i class="fa fa-arrow-circle-up"></i></a>';
+                    var linkCambiarOrdenDown = '<a id="' +idDown+ '" href="#" onclick="cambiarNivel('+idDown+')"><i class="fa fa-arrow-circle-down"></i></a>';
+
                     tablaActual.row.add( [
                         '<input type="checkbox" id="nivel-' + item.id + '">',
-                        (item.padre != null ? '<a id="' +idDelete+ '" href="#" onclick="borrarNivel('+idDelete+')"><i class="fa fa-minus"></i></a>' : '<a id="' +idAdd+ '" style="margin-right: 10%;" href="#" onclick="agregarNivel('+idDelete+')"><i class="fa fa-plus-square"></i></a>' +
-                        '<a id="' +idDelete+ '" href="#" onclick="borrarNivel('+idDelete+')"><i class="fa fa-minus"></i></a>')+'<a id="' +idEdit+ '" style="margin-left: 10%;" href="#" onclick="editarNivel('+idEdit+')"><i class="fa fa-pencil"></i></a>',
+                        (item.padre != null ? linkBorrarNivel : linkAgregarNivel + linkBorrarNivel)+linkEditarNivel,
                         item.orden,
                         (item.padre != null ? "-------"+item.nombre : item.nombre),
                         item.idTipo.nombre,
                         item.idEstatus.nombre,
-                        (item.orden != 1 ? '<a id="' +idUp+ '" style="margin-right: 10%;" href="#"  onclick="cambiarNivel('+idUp+')"><i class="fa fa-arrow-circle-up"></i></a>' +
-                        '<a id="' +idDown+ '" href="#" onclick="cambiarNivel('+idDown+')"><i class="fa fa-arrow-circle-down"></i></a>' : '<a id="' +idDown+ '" href="#" onclick="cambiarNivel('+idDown+')"><i class="fa fa-arrow-circle-down"></i></a>'),
+                        (item.orden != 1 ? linkCambiarOrdenUp + linkCambiarOrdenDown : linkCambiarOrdenDown),
                     ] ).draw( false );
                 }
                 idAdd="'nivel-add-";
@@ -67,10 +70,14 @@
     $("#btn-registrar-nivel").on('click', function(){
         loadModule('nivel','nivel','Nuevo');
     });
+
+    $("#nivel-eliminar-selccionados").on('click', function(){
+        eliminarSeleccionados();
+    });
 })();
 
 function borrarNivel(id) {
-    var result = prompt("¿Esta seguro que desea eliminar el nivel seleccionado?");
+    var result = prompt("¿Esta seguro que desea eliminar el nivel seleccionado?", "si");
     if(result == "si"){
         $.ajax({
             url: R_NIVEL_INDEX + '/PRU-1986/index.json',
@@ -119,4 +126,14 @@ function cambiarNivel(id) {
 function editarNivel(id) {
     window.sessionStorage.setItem("nivelEditId", id.split("-")[2]);
     loadModule('nivel','nivel','Nuevo');
+}
+
+function eliminarSeleccionados() {
+    var tabla = $('#nivel-cuerpo-tabla tr');
+    var i;
+    for(i=0; i<tabla.length; i++){
+        if(tabla[i].children[0].children[0].checked){
+            console.log(tabla[i].children[0].children[0].id.split("-")[1]);
+        }
+    }
 }

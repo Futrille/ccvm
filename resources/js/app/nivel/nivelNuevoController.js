@@ -186,6 +186,10 @@ $("#btn-nivel-registrar-cancelar").on('click', function(){
     loadModule('nivel','nivel','Index');
 });
 
+$("#btn-nivel-registrar-limpiar").on('click', function(){
+    clear();
+});
+
 $("#btn-nivel-registrar-guardar").on('click', function(){
     if(validate()){
         if(nivelEditId!=null){
