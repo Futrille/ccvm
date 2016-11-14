@@ -9,12 +9,12 @@ var nivelEditId = null;
     'use strict';
 
     if(window.sessionStorage.getItem("idPadre")!=null){
-        contTotal=4;
+        contTotal=2;
         idPadre=window.sessionStorage.getItem("idPadre");
         window.sessionStorage.removeItem("idPadre");
         setPadre(idPadre);
     }else{
-        contTotal=3;
+        contTotal=1;
     }
 
     if(window.sessionStorage.getItem("nivelEditId")!=null){
@@ -27,9 +27,7 @@ var nivelEditId = null;
         setTitleDescription(" Ingrese los datos del nivel nuevo.");
     }
 
-    setValoresVariables($("#nivIconos"), 'nivel_icono');
-    setValoresVariables($("#nivEstatus"), 'nivel_estatus');
-    setValoresVariables($("#nivTipo"), 'nivel_tipo');
+    setValoresVariables();
 })();
 
 function validate() {
@@ -41,11 +39,10 @@ function clear() {
     $('#nivNombre').val('');
 }
 
-function setValoresVariables(select, codigo){
-    var iconos =  select;
+function setValoresVariables(){
     var url = R_VALORVARIABLE_INDEX;
     var headers = {
-        'vvaCodigo': codigo
+        'vvaCodigo': 'nivel_icono,nivel_estatus,nivel_tipo'
     };
     $.ajax({
         url: url,
@@ -54,8 +51,20 @@ function setValoresVariables(select, codigo){
         headers: headers,
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            $.each(data, function (i, item) {
-                iconos.append($('<option>', {
+            $.each(data[0], function (i, item) {
+                $("#nivIconos").append($('<option>', {
+                    value: item.id,
+                    text : item.nombre
+                }));
+            });
+            $.each(data[1], function (i, item) {
+                $("#nivEstatus").append($('<option>', {
+                    value: item.id,
+                    text : item.nombre
+                }));
+            });
+            $.each(data[2], function (i, item) {
+                $("#nivTipo").append($('<option>', {
                     value: item.id,
                     text : item.nombre
                 }));
