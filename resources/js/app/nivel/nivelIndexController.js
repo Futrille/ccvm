@@ -16,28 +16,28 @@ var idForDelete=null;
             "ordering": false,
             "info": true,
             "autoWidth": false
-            //"responsive": false
         });
     }
     catch (e){
         console.log("Error [Nivel/Index/Controller]:", e.message);
     }
 
-
     getList(R_NIVEL_INDEX + '/PRU-1986/index.json')
         .done(function(response) {
-            var idAdd="'nivel-add-";
-            var idDelete = "'nivel-delete-";
-            var idUp = "'nivel-up-";
-            var idDown = "'nivel-down-";
-            var idEdit = "'nivel-edit-";
+            var countParents=0;
+            $.each(response.data, function(i, item) {
+                if(item.padre==null){
+                    countParents++;
+                }
+            });
+            console.log(countParents);
             $.each(response.data, function(i, item) {
                 if (tablaActual != null){
-                    idAdd+=item.id+"'";
-                    idDelete+=item.id+"'";
-                    idUp+=item.id+"'";
-                    idDown+=item.id+"'";
-                    idEdit+=item.id+"'";
+                    var idAdd="'nivel-add-"+item.id+"'";
+                    var idDelete = "'nivel-delete-"+item.id+"'";
+                    var idUp = "'nivel-up-"+item.id+"'";
+                    var idDown = "'nivel-down-"+item.id+"'";
+                    var idEdit = "'nivel-edit-"+item.id+"'";
 
                     var linkBorrarNivel = '<a id="' +idDelete+ '" href="javascript:void(0);" data-toggle="modal" data-target="#myModalSelected" onclick="seleccionNivelBorrar('+idDelete+')"><i class="fa fa-minus"></i></a>';
                     var linkAgregarNivel = '<a id="' +idAdd+ '" style="margin-right: 10%;" href="#" onclick="agregarNivel('+idDelete+')"><i class="fa fa-plus-square"></i></a>';
@@ -52,14 +52,10 @@ var idForDelete=null;
                         (item.padre != null ? "-------"+item.nombre : item.nombre),
                         item.idTipo.nombre,
                         item.idEstatus.nombre,
-                        (item.orden != 1 ? linkCambiarOrdenUp + linkCambiarOrdenDown : linkCambiarOrdenDown),
+                        (item.orden != 1 ? linkCambiarOrdenUp : '') +
+                            (((item.padre == null && item.orden!=countParents)||(response.data[i+1]!=undefined && item.padre!=null && response.data[i+1].padre!=null)) ? linkCambiarOrdenDown : '')
                     ] ).draw( false );
                 }
-                idAdd="'nivel-add-";
-                idDelete = "'nivel-delete-";
-                idUp = "'nivel-up-";
-                idDown = "'nivel-down-";
-                idEdit = "'nivel-edit-";
             });
         })
         .fail(function(dataFail) {
