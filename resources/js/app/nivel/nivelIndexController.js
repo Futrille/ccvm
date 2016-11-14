@@ -1,6 +1,7 @@
 /**
  * Created by luisc on 28/10/2016.
  */
+var idForDelete=null;
 (function() {
     'use strict';
 
@@ -38,7 +39,7 @@
                     idDown+=item.id+"'";
                     idEdit+=item.id+"'";
 
-                    var linkBorrarNivel = '<a id="' +idDelete+ '" href="#" onclick="borrarNivel('+idDelete+')"><i class="fa fa-minus"></i></a>';
+                    var linkBorrarNivel = '<a id="' +idDelete+ '" href="javascript:void(0);" data-toggle="modal" data-target="#myModalSelected" onclick="seleccionNivelBorrar('+idDelete+')"><i class="fa fa-minus"></i></a>';
                     var linkAgregarNivel = '<a id="' +idAdd+ '" style="margin-right: 10%;" href="#" onclick="agregarNivel('+idDelete+')"><i class="fa fa-plus-square"></i></a>';
                     var linkEditarNivel = '<a id="' +idEdit+ '" style="margin-left: 10%;" href="#" onclick="editarNivel('+idEdit+')"><i class="fa fa-pencil"></i></a>';
                     var linkCambiarOrdenUp = '<a id="' +idUp+ '" style="margin-right: 10%;" href="#"  onclick="cambiarNivel('+idUp+')"><i class="fa fa-arrow-circle-up"></i></a>';
@@ -71,23 +72,35 @@
         loadModule('nivel','nivel','Nuevo');
     });
 
-    $("#nivel-eliminar-selccionados").on('click', function(){
+    $("#nivel-eliminar-seleccionados").on('click', function(){
         eliminarSeleccionados();
+    });
+
+    $("#nivel-eliminar").on('click', function(){
+        borrarNivel();
+    });
+
+    $("#nivel-eliminar-cancel").on('click', function(){
+        idForDelete=null;
     });
 })();
 
-function borrarNivel(id) {
-    var result = prompt("¿Esta seguro que desea eliminar el nivel seleccionado?", "si");
-    if(result == "si"){
+function seleccionNivelBorrar(id) {
+    idForDelete=id.split("-")[2];
+}
+
+function borrarNivel() {
+    if(idForDelete!=null){
         $.ajax({
             url: R_NIVEL_INDEX + '/PRU-1986/index.json',
             type: 'DELETE',
             dataType: 'json',
             headers: {
-                'id': id.split("-")[2]
+                'id': idForDelete
             },
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                idForDelete=null;
                 console.log(data);
                 loadModule('nivel','nivel','Index');
             },
@@ -131,9 +144,30 @@ function editarNivel(id) {
 function eliminarSeleccionados() {
     var tabla = $('#nivel-cuerpo-tabla tr');
     var i;
+    var result=[];
     for(i=0; i<tabla.length; i++){
         if(tabla[i].children[0].children[0].checked){
-            console.log(tabla[i].children[0].children[0].id.split("-")[1]);
+            result.push(tabla[i].children[0].children[0].id.split("-")[1]);
         }
+    }
+    console.log(result.toString());
+    if(result!=[]){
+        $.ajax({
+            url: R_NIVEL_INDEX + '/PRU-1986/index.json'+"?XDEBUG_SESSION_START=17204",
+            type: 'DELETE',
+            dataType: 'json',
+            headers: {
+                'ids': result.toString()
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                idForDelete=null;
+                console.log(data);
+                loadModule('nivel','nivel','Index');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
     }
 }
