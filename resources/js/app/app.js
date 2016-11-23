@@ -40,10 +40,10 @@
             $(this).addClass('active');
         });
 
-         $("#btn-inicio").on('click', function(){
+         $("#btn-monitor").on('click', function(){
              loadModule('monitor','monitor','Index');
          });
-         $( "#btn-inicio" ).trigger( "click" );
+        // $( "#btn-inicio" ).trigger( "click" );
 
         $("#btn-niveles").on('click', function(){
             loadModule('nivel','nivel','Index');
