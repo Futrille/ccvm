@@ -13,23 +13,22 @@
         },
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            //console.log(data);
             for(var i = 0; i < data.data.length; i++){
-                console.log(data.data[i].nombre);
+                $('#cuerpoMonitor').append("" +
+                    "<div class='col-lg-3 col-xs-6'>" +
+                        "<div class='small-box bg-"+data.data[i].color+"'>" +
+                            "<div class='inner'>" +
+                                "<h3 id='nivel_"+data.data[i].nombre.toLowerCase()+"_cantidad'>-</h3>" +
+                                "<p>"+data.data[i].nombre+"</p>" +
+                            "</div>" +
+                            "<div class='icon'>" +
+                                "<i class='fa fa-"+data.data[i].idIcono.nombre+"'></i>" +
+                            "</div>" +
+                            "<a id='consultar-nivel-1' href='javascript:void(0);' class='small-box-footer'>Ver listado <i class='fa fa-arrow-circle-right'></i></a>" +
+                        "</div>" +
+                    "</div>");
             }
-            $('#cuerpoMonitor').append("" +
-                "<div class='col-lg-3 col-xs-6'>" +
-                    "<div class='small-box bg-green'>" +
-                        "<div class='inner'>" +
-                            "<h3 id='nivel_ganados_cantidad'>-</h3>" +
-                            "<p>"+data.data[0].nombre+"</p>" +
-                        "</div>" +
-                        "<div class='icon'>" +
-                            "<i class='fa fa-heart'></i>" +
-                        "</div>" +
-                        "<a id='consultar-nivel-1' href='javascript:void(0);' class='small-box-footer'>Ver listado <i class='fa fa-arrow-circle-right'></i></a>" +
-                    "</div>" +
-                "</div>");
+
         },
         error: function (error) {
             console.log(error);
