@@ -16,7 +16,6 @@
         getBody(getRoute('persona_new', getIdEntidad()))
         .done(function(response) {
             response = $.parseJSON(response);
-            console.log("data de back:", response);
             if(response != null){
                 cargarFormulario((response.data));
             }
@@ -94,7 +93,42 @@
                 $('#form-ganados').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
                 var jqxhr = $.post(
                     getRoute('persona_new', getIdEntidad())
-                    , $('form[name=persona]').serialize() + '&' + $('form[name=familia]').serialize()
+                    , ( $('form[name=persona]') != null ? $('form[name=persona]').serialize() + '&' : '' ) + $('form[name=familia]').serialize()
+                    , function(response) {
+                        // response = $.parseJSON(response);
+                        if(response != null){
+                            cargarFormulario($.parseHTML(response.data), false);
+                        }
+                    // validateSession(data);
+                    // if (data != null && data.status != null && data.status == "error"){
+                    //     // setMesageCode(MSG_SAVE_ERROR);
+                    //     // printMessage(getMessageCode());
+                    // }
+                    // else {//if (data != null && data.status != null && data.status == "success"){
+                    //     setIdEntidad(data.response.id);
+                    //     // setMesageCode(MSG_SAVE_SUCCESS);
+                    //     loadModule('ganados','ganados','Index');
+                    // }
+                })
+                .done(function() {
+                })
+                .fail(function() {
+                    $('#table-loader').remove();
+                })
+                .always(function() {
+                    $('#table-loader').remove();
+                });
+            });
+
+            $("#btn-ganados-familia-guardar").on('click',function (e) {
+                e.preventDefault();
+                APP.storage.remove('ganados-familia-index');
+                APP.storage.remove('ganados-familia-nuevo');
+                $('#form-ganados').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+                console.log("boton guardar ", $('form[name=persona]').serialize());
+                var jqxhr = $.post(
+                    getRoute('persona_new', getIdEntidad())
+                    , $('form[name=familia]').serialize()
                     , function(response) {
                         // response = $.parseJSON(response);
                         if(response != null){
