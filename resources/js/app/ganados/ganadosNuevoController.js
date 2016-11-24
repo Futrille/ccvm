@@ -5,6 +5,23 @@
 
     var codeSessionStorage = 'ganados-familia-nuevo';
     var data = null;
+    var tablaPersonas = null;
+
+    try{
+        tablaPersonas = $("#table-familia-personas").DataTable({
+            "paging": false,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": false,
+            "info": false,
+            "autoWidth": false,
+            "responsive": true
+        });
+    }
+    catch (e){
+        console.log("Error [Ganados/Nuevo/Controller]:", e.message);
+    }
+    
     if (getIdEntidad() == 0){
         data = APP.storage.get(codeSessionStorage);
     }
@@ -18,6 +35,9 @@
             response = $.parseJSON(response);
             if(response != null){
                 cargarFormulario((response.data));
+                if (response.metadata != null && response.metadata.familia != null){
+                    llenarTabla((response.metadata.familia.personas));
+                }
             }
         })
         .fail(function(dataFail) {
@@ -52,6 +72,22 @@
         catch(e){
             console.log('Error [Ganados/Nuevo]: ' + e.message);
         }
+    }
+
+    function llenarTabla(values){
+        // APP.storage.set(codeStorage, JSON.stringify(values));
+        $.each(values, function(i, item) {
+            if (tablaPersonas != null){
+                tablaPersonas.row.add( [
+                    (i+1),
+                    '<input type="checkbox" id="persona-' + item.id + '">',
+                    item.idRolFamilia.descripcion,
+                    '<a id="persona_' + item.id + '" href="javascript:loadModule(\'ganados\',\'ganados\',\'Nuevo\',' + item.id + ');">' + item.nombres + '</a>',
+                    (item.correo != null && item.correo != '' ? item.correo : '') + ' / ' + (item.telefono != null && item.telefono != '' ? item.telefono : ''),
+                ] ).draw( false );
+            }
+        });
+        $("#loader-personas").remove();
     }
 
     /**
