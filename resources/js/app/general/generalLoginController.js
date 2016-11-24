@@ -2,7 +2,9 @@
     'use strict';
 
     $( "#btn-entrar" ).click(function() {
-        $('form[name=login]').submit();
+        e.preventDefault();
+        console.log("login...");
+        //$('form[name=login]').submit();
     });
 
     // $("form[name=login]").submit(function(e) {
