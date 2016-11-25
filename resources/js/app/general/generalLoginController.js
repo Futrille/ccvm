@@ -1,36 +1,29 @@
 (function() {
     'use strict';
-
-    // $( "#btn-entrar" ).click(function(e) {
-    //     e.preventDefault();
-    //     console.log("login...");
-    //     //$('form[name=login]').submit();
-    // });
-
+    APP.storage.removeAll();
     $("form[name=login]").submit(function(e) {
+        // $(document).ajaxStart(function() { Pace.restart(); });
         e.preventDefault();
-        var jqxhr = $.post( getRoute('login') , $('form[name=login]').serialize(), function(response, status, xhr) {
-            if (response.status != undefined && response.status == 0){
+        APP.storage.removeAll();
+        var jqxhr = $.post( getRoute('login') , $('form[name=login]').serialize(), null)
+        .done(function(response) {
+            if (response.status != undefined && response.status == 0 && response.message == 'login'){
                 // setMesageCode(MSG_NO_MESSAGE);
+                APP.storage.set('session', (new Date()).getTime() + '');
                 window.location.href = getRoute();
             }else {
                 // setMesageCode(MSG_LOGIN_ERROR);
                 // printMessage(getMessageCode());
             }
             //else {//if (data != null && data.status != null && data.status == "success"){
-                //setIdEntidad(data.response.id);
-                //setMesageCode(MSG_SAVE_SUCCESS);
-                //loadModule('ganados','ganados','Index');
+            //setIdEntidad(data.response.id);
+            //setMesageCode(MSG_SAVE_SUCCESS);
+            //loadModule('ganados','ganados','Index');
             //}
         })
-        .done(function() {
-
-        })
-        .fail(function() {
-
-        })
-        .always(function() {
-
+        .fail(function(dataFail){
+            APP.storage.removeAll();
+            console.log("DataFail Login:", dataFail);
         });
     });
 

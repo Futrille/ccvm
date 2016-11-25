@@ -1,14 +1,21 @@
 (function() {
     'use strict';
-    APP.storage.removeAll();
+    //APP.storage.removeAll();
 //background-color: #ecf0f5;   #222d32
-    $('.content-wrapper').css('background-color', '#222d32');
-    $.get( getRoute('homepage') , null, null, 'json').done(function(response) {
-        $('.content-wrapper').css('background-color', '#ecf0f5');
-        if (validateSession(response)){
-            cargarPanel();
-        }
-    });
+    console.log("Session:", APP.storage.get('session'));
+    if (APP.storage.get('session') == null){
+        $('.content-wrapper').css('background-color', '#222d32');
+        $.get( getRoute('homepage') , null, null, 'json').done(function(response) {
+            $('.content-wrapper').css('background-color', '#ecf0f5');
+            if (validateSession(response)){
+                APP.storage.set('session', (new Date()).getTime() + '');
+                cargarPanel();
+            }
+        });
+    }
+    else{
+        cargarPanel();
+    }
 
 
     function cargarPanel(){
@@ -19,6 +26,7 @@
 
     function postHeader(){
         $("#logout").on('click', function(){
+            //APP.storage.removeAll();
             var jqXHR = $.get(getRoute('logout'),null,null,'json');
             window.location.href = getRoute() + '/login.html';
         });
