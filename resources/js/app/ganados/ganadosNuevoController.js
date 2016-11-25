@@ -34,6 +34,7 @@
         .done(function(response) {
             response = $.parseJSON(response);
             if(response != null){
+                validateSession(response);
                 cargarFormulario((response.data));
                 if (response.metadata != null && response.metadata.familia != null){
                     llenarTabla((response.metadata.familia.personas));
@@ -133,6 +134,7 @@
                     , function(response) {
                         // response = $.parseJSON(response);
                         if(response != null){
+                            validateSession(response);
                             cargarFormulario($.parseHTML(response.data), false);
                         }
                     // validateSession(data);

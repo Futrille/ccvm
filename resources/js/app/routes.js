@@ -66,6 +66,10 @@ function getRoute(nameRoute, id){
         case 'login':
             route = route + '/login';
             break;
+        
+        case 'logout':
+            route = route + '/logout';
+            break;
 
         case 'homepage':
             route = route + '/';

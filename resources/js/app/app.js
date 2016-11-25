@@ -1,34 +1,27 @@
 (function() {
     'use strict';
     APP.storage.removeAll();
-    
+//background-color: #ecf0f5;   #222d32
+    $('.content-wrapper').css('background-color', '#222d32');
+    $.get( getRoute('homepage') , null, null, 'json').done(function(response) {
+        $('.content-wrapper').css('background-color', '#ecf0f5');
+        if (validateSession(response)){
+            cargarPanel();
+        }
+    });
 
-    // var jqxhr = $.post( getRoute('homepage') , $('form[name=login]').serialize(), function(data, status, xhr) {
-    //     console.log("data",data);
-    //     if (data.status != undefined && data.status == 'success'){
-    //         setMesageCode(MSG_NO_MESSAGE);
-    //         //window.location.href = getRoute();
-             cargarPanel();
-    //     }else if (data.status == 'logout'){
-    //         setMesageCode(MSG_LOGIN_ERROR);
-    //         printMessage(getMessageCode());
-    //         window.location.href = 'login.html';
-    //     }
-    // })
-    // .done(function() {
-    //
-    // })
-    // .fail(function() {
-    //
-    // })
-    // .always(function() {
-    //     //$.loader('close');
-    // });
 
     function cargarPanel(){
-        $('#ivm-header-menu').load('views/index/header-menu.html');
+        $('#ivm-header-menu').load('views/index/header-menu.html', postHeader);
         $('#ivm-footer').load('views/index/footer.html');
         $('#ivm-side-menu').load('views/index/side-menu.html', hacerClick);
+    }
+
+    function postHeader(){
+        $("#logout").on('click', function(){
+            var jqXHR = $.get(getRoute('logout'),null,null,'json');
+            window.location.href = getRoute() + '/login.html';
+        });
     }
 
     function hacerClick(){

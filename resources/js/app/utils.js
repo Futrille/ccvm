@@ -1,3 +1,5 @@
+
+
 var TITLE = '';
 var TITLE_DESCRIPTION = '';
 
@@ -152,11 +154,13 @@ function getBody(url){
  * @param data
  */
 function validateSession(data){
-    if (data.status != undefined && data.status == 'logout'){
-        setMesageCode(MSG_LOGIN_ERROR);
-        printMessage(getMessageCode());
-        window.location.href = 'login.html';
+    if (data.message != undefined && data.message == 'logout'){
+        // setMesageCode(MSG_LOGIN_ERROR);
+        // printMessage(getMessageCode());
+        window.location.href = getRoute() + '/login.html';
+        return false;
     }
+    return true;
 }
 
 // function getFromStorage(clave, defaultValue){
