@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    setTitle('Familias Conectadas ');
-    setTitleDescription('');
+    APP.setTitle('Familias Conectadas ');
+    APP.setTitleDescription('');
     var codeStorage = 'ganados-familia-index';
     var tablaActual = null;
     var data = null;

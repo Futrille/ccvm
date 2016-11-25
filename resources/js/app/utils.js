@@ -1,14 +1,25 @@
 
 
-var TITLE = '';
-var TITLE_DESCRIPTION = '';
-
 var APP = {
+    //Constants
     MAX_SEG_SESSION : 20
+    , TITLE: ''
+    , TITLE_DESCRIPTION: ''
 
+    //Globals
     , idEntidad : 0
     , useStorage: true
     , storage: new AppStorage()
+
+    , validate: function(data){
+        if (data != null && data.message != null && data.message == 'logout'){
+            // setMesageCode(MSG_LOGIN_ERROR);
+            // printMessage(getMessageCode());
+            window.location.href = getRoute() + '/login.html';
+            return false;
+        }
+        return true;
+    }
 
     , setCookie: function (cname, cvalue, seconds) {
         var d = new Date();
@@ -46,7 +57,7 @@ var APP = {
                 null,
                 function(response){
                     console.log("Callback getJSON...");
-                    validateSession(response);
+                    APP.validate(response);
                 },
                 'json'
             );
@@ -67,7 +78,7 @@ var APP = {
                 null,
                 function(response){
                     console.log("Callback getHTML...");
-                    validateSession(response);
+                    this.validate(response);
                 },
                 'html'
             );
@@ -75,6 +86,15 @@ var APP = {
         return jqXHR;
     }
 
+    , setTitle: function(titulo){
+        this.TITLE = titulo;
+        $('#page-title').html(this.TITLE + '<small id="page-title-descripcion">' + this.TITLE_DESCRIPTION + '</small>');
+    }
+
+    , setTitleDescription: function(valor){
+        this.TITLE_DESCRIPTION = valor;
+        $('#page-title-descripcion').html(this.TITLE_DESCRIPTION);
+    }
 
 };
 
@@ -201,7 +221,7 @@ function getList(url){
             null,
             function(response){
                 console.log("Callback getList...");
-                validateSession(response);
+                APP.validate(response);
             },
             'json'
         );
@@ -222,89 +242,12 @@ function getBody(url){
             null,
             function(response){
                 console.log("Callback getBody...");
-                validateSession(response);
+                APP.validate(response);
             },
             'html'
         );
     $.xhrPool.push(jqXHR);
     return jqXHR;
-}
-
-/**
- *
- * @param data
- */
-function validateSession(data){
-    if (data != null && data.message != null && data.message == 'logout'){
-        // setMesageCode(MSG_LOGIN_ERROR);
-        // printMessage(getMessageCode());
-        window.location.href = getRoute() + '/login.html';
-        return false;
-    }
-    return true;
-}
-
-// function getFromStorage(clave, defaultValue){
-//     // console.log("Storage.get:", APP.storage.get(clave, defaultValue));
-//     if (defaultValue == undefined){
-//         defaultValue = null;
-//     }
-//     if (APP.cifrar){
-//         clave = $.Cypher("en",clave+'',APP.clave);
-//         // var preResultado = sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave) : defaultValue;
-//         // if (preResultado != defaultValue){
-//         //     var values = preResultado.split('-');
-//         //     resultado = values[0];
-//         //     if (($.now() - values[1]) / 1000 > APP.MAX_SEG_SESSION){
-//         //         resultado = defaultValue;
-//         //         sessionStorage.removeItem(clave);
-//         //     }
-//         // }
-//         // else{
-//         //     resultado = preResultado;
-//         // }
-//         return sessionStorage.getItem(clave) != null ? $.Cypher("de",sessionStorage.getItem(clave),APP.clave)  : defaultValue;
-//     }
-//     else{
-//         return sessionStorage.getItem(clave) != null ? sessionStorage.getItem(clave)  : defaultValue;
-//     }
-// }
-
-// function setToStorage(clave, valor){
-//     // console.log("Storage.set:", APP.storage.set(clave, valor));
-//     if (APP.cifrar){
-//         sessionStorage.setItem($.Cypher("en",clave+'',APP.clave), $.Cypher("en",valor+'',APP.clave));
-//     }
-//     else{
-//         sessionStorage.setItem(clave, valor);
-//     }
-// }
-
-// function removeStorage(clave){
-//     // console.log("Storage.remove:", APP.storage.remove(clave));
-//     if (APP.cifrar){
-//         sessionStorage.removeItem($.Cypher("en",clave+'',APP.clave));
-//     }
-//     else{
-//         sessionStorage.removeItem(clave);
-//     }
-// }
-
-// function clearAllStorage(){
-//     console.log("Storage.removeAll:", APP.storage.removeAll());
-//     sessionStorage.clear();
-// }
-
-
-
-function setTitle(titulo){
-    TITLE = titulo;
-    $('#page-title').html(TITLE + '<small id="page-title-descripcion">' + TITLE_DESCRIPTION + '</small>');
-}
-
-function setTitleDescription(valor){
-    TITLE_DESCRIPTION = valor;
-    $('#page-title-descripcion').html(TITLE_DESCRIPTION);
 }
 
 JSON.stringify = JSON.stringify || function (obj) {

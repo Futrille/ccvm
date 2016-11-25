@@ -18,13 +18,13 @@ var nivelEditId = null;
     }
 
     if(window.sessionStorage.getItem("nivelEditId")!=null){
-        setTitle('Editar Nivel');
+        APP.setTitle('Editar Nivel');
         nivelEditId=window.sessionStorage.getItem("nivelEditId");
         window.sessionStorage.removeItem("nivelEditId");
-        setTitleDescription(" Ingrese los datos del nivel.");
+        APP.setTitleDescription(" Ingrese los datos del nivel.");
     }else{
-        setTitle('Registrar Nivel');
-        setTitleDescription(" Ingrese los datos del nivel nuevo.");
+        APP.setTitle('Registrar Nivel');
+        APP.setTitleDescription(" Ingrese los datos del nivel nuevo.");
     }
 
     setValoresVariables();

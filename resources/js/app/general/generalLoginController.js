@@ -2,12 +2,11 @@
     'use strict';
 
     $('.overlay').hide();
-
     APP.storage.removeAll();
+    
     $("form").submit(function(e) {
         $('.overlay').show();
         e.preventDefault();
-
         APP.storage.removeAll();
         
         $.post( getRoute('login') , '_username=' + $('#valor1').val() + '&_password=' + $('#valor2').val(), null)

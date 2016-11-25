@@ -1,8 +1,8 @@
 (function() {
     'use strict';
 
-    setTitle('Niveles ');
-    setTitleDescription('');
+    APP.setTitle('Niveles ');
+    APP.setTitleDescription('');
 
     $.ajax({
         url: R_NIVEL_INDEX + '/PRU-1986/index.json',

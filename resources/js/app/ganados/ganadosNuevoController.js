@@ -1,7 +1,7 @@
 (function() {
     'use strict';
-    setTitle('Registrar Familia ');
-    setTitleDescription(" Ingrese los datos de la Familia Conectada.");
+    APP.setTitle('Registrar Familia ');
+    APP.setTitleDescription(" Ingrese los datos de la Familia Conectada.");
 
     var codeSessionStorage = 'ganados-familia-nuevo';
     var data = null;
@@ -133,7 +133,7 @@
                     , function(response) {
                         // response = $.parseJSON(response);
                         if(response != null){
-                            validateSession(response);
+                            APP.validate(response);
                             cargarFormulario($.parseHTML(response.data), false);
                         }
                     // validateSession(data);

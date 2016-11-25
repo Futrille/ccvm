@@ -5,8 +5,8 @@ var idForDelete=null;
 (function() {
     'use strict';
 
-    setTitle('Niveles ');
-    setTitleDescription('');
+    APP.setTitle('Niveles ');
+    APP.setTitleDescription('');
     var tablaActual = null;
     try{
         tablaActual = $("#nivel-main-table").DataTable({
