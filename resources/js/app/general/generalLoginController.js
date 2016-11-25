@@ -1,10 +1,10 @@
 (function() {
     'use strict';
 
-    $( "#btn-entrar" ).click(function() {
+    $( "#btn-entrar" ).click(function(e) {
         e.preventDefault();
         console.log("login...");
-        //$('form[name=login]').submit();
+        $('form[name=login]').submit();
     });
 
     // $("form[name=login]").submit(function(e) {
