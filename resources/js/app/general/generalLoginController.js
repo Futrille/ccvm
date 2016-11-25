@@ -1,17 +1,23 @@
 (function() {
     'use strict';
+
+    $('.overlay').hide();
+
     APP.storage.removeAll();
-    $("form[name=login]").submit(function(e) {
-        // $(document).ajaxStart(function() { Pace.restart(); });
+    $("form").submit(function(e) {
+        $('.overlay').show();
         e.preventDefault();
+
         APP.storage.removeAll();
-        var jqxhr = $.post( getRoute('login') , $('form[name=login]').serialize(), null)
+        
+        $.post( getRoute('login') , '_username=' + $('#valor1').val() + '&_password=' + $('#valor2').val(), null)
         .done(function(response) {
             if (response.status != undefined && response.status == 0 && response.message == 'login'){
                 // setMesageCode(MSG_NO_MESSAGE);
                 APP.storage.set('session', (new Date()).getTime() + '');
                 window.location.href = getRoute();
             }else {
+                $('.overlay').hide();
                 // setMesageCode(MSG_LOGIN_ERROR);
                 // printMessage(getMessageCode());
             }
@@ -22,6 +28,7 @@
             //}
         })
         .fail(function(dataFail){
+            $('.overlay').hide();
             APP.storage.removeAll();
             console.log("DataFail Login:", dataFail);
         });

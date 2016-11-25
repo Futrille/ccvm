@@ -1,17 +1,16 @@
 (function() {
     'use strict';
-    //APP.storage.removeAll();
-//background-color: #ecf0f5;   #222d32
-    console.log("Session:", APP.storage.get('session'));
+
     if (APP.storage.get('session') == null){
         $('.content-wrapper').css('background-color', '#222d32');
-        $.get( getRoute('homepage') , null, null, 'json').done(function(response) {
-            $('.content-wrapper').css('background-color', '#ecf0f5');
-            if (validateSession(response)){
+        $('.content-wrapper').css('main-footer', '#222d32');
+        APP.getJSON(getRoute('homepage'))
+            .done(function(response) {
+                $('.content-wrapper').css('background-color', '#ecf0f5');
+                $('.content-wrapper').css('main-footer', '#ecf0f5');
                 APP.storage.set('session', (new Date()).getTime() + '');
                 cargarPanel();
-            }
-        });
+            });
     }
     else{
         cargarPanel();

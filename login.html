@@ -29,43 +29,54 @@
         <!--</div>-->
         <a href=""><img src="resources/images/logo.png" /></a>
     </div>
-    <div class="login-box-body">
-        <p class="login-box-msg">Ingrese sus credenciales para Iniciar Sesión</p>
-
-        <form name="login" action="/ivm-core/web/app_dev.php/login" method="post">
-            <div class="form-group has-feedback">
-                <input type="text" id="username" name="_username" class="form-control" placeholder="N&uacute;mero de C&eacute;dula">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="password" id="password" name="_password" class="form-control" placeholder="Contrase&ntilde;a">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <!--<div class="col-xs-8">-->
-                    <!--<div class="checkbox icheck">-->
-                        <!--<label>-->
-                            <!--<input type="checkbox"> Remember Me-->
-                        <!--</label>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <div class="col-xs-4">
-                    <button id="btn-entrar" type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
-                </div>
-            </div>
-        </form>
-
-        <!--<div class="social-auth-links text-center">-->
-            <!--<p>- OR -</p>-->
-            <!--<a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using-->
-                <!--Facebook</a>-->
-            <!--<a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using-->
-                <!--Google+</a>-->
+    <div class="box box-solid">
+        <!--<div class="box-header">-->
+            <!--<h3 class="box-title">Loading state</h3>-->
         <!--</div>-->
-        <!-- /.social-auth-links -->
-        <!--<a href="#">I forgot my password</a><br>-->
-        <!--<a href="register.html" class="text-center">Register a new membership</a>-->
+        <div class="box-body">
 
+            <div class="login-box-body">
+                <p class="login-box-msg">Ingrese sus credenciales para Iniciar Sesión</p>
+
+                <form>
+                    <div class="form-group has-feedback">
+                        <input type="text" id="valor1" class="form-control" placeholder="N&uacute;mero de C&eacute;dula">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" id="valor2" class="form-control" placeholder="Contrase&ntilde;a">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <!--<div class="col-xs-8">-->
+                        <!--<div class="checkbox icheck">-->
+                        <!--<label>-->
+                        <!--<input type="checkbox"> Remember Me-->
+                        <!--</label>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="col-xs-4">
+                            <button id="btn-entrar" type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!--<div class="social-auth-links text-center">-->
+                <!--<p>- OR -</p>-->
+                <!--<a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using-->
+                <!--Facebook</a>-->
+                <!--<a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using-->
+                <!--Google+</a>-->
+                <!--</div>-->
+                <!-- /.social-auth-links -->
+                <!--<a href="#">I forgot my password</a><br>-->
+                <!--<a href="register.html" class="text-center">Register a new membership</a>-->
+
+            </div>
+        </div>
+        <div class="overlay">
+            <i class="fa fa-refresh fa-spin"></i>
+        </div>
     </div>
 </div>
 

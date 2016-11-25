@@ -17,6 +17,7 @@ var APP = {
         var expires = "expires="+ d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
+
     , getCookie: function (cname) {
         var name = cname + "=";
         var ca = document.cookie.split(';');
@@ -31,6 +32,50 @@ var APP = {
         }
         return "";
     }
+
+    /**
+     * Consulta lista de datos desde el backend
+     * @param url
+     * @returns {*}
+     */
+    , getJSON: function(url){
+        $(document).ajaxStart(function() { Pace.restart(); });
+        var jqXHR =
+            $.get(
+                url,
+                null,
+                function(response){
+                    console.log("Callback getJSON...");
+                    validateSession(response);
+                },
+                'json'
+            );
+        $.xhrPool.push(jqXHR);
+        return jqXHR;
+    }
+
+    /**
+     * Consulta lista de datos desde el backend
+     * @param url
+     * @returns {*}
+     */
+    , getHTML: function(url){
+        $(document).ajaxStart(function() { Pace.restart(); });
+        var jqXHR =
+            $.get(
+                url,
+                null,
+                function(response){
+                    console.log("Callback getHTML...");
+                    validateSession(response);
+                },
+                'html'
+            );
+        $.xhrPool.push(jqXHR);
+        return jqXHR;
+    }
+
+
 };
 
 $.xhrPool = [];
@@ -150,11 +195,16 @@ function loadModule(modulo, vista, accion, id, messageCode){
  */
 function getList(url){
     $(document).ajaxStart(function() { Pace.restart(); });
-    var jqXHR = $.get(url,{
-            apiKey:'77fa53ff60e8f41e40260b0dad826d76',
-            "_": $.now()
-        },null,'json'
-    );
+    var jqXHR =
+        $.get(
+            url,
+            null,
+            function(response){
+                console.log("Callback getList...");
+                validateSession(response);
+            },
+            'json'
+        );
     $.xhrPool.push(jqXHR);
     return jqXHR;
 }
@@ -166,7 +216,16 @@ function getList(url){
  */
 function getBody(url){
     $(document).ajaxStart(function() { Pace.restart(); });
-    var jqXHR = $.get(url,null,null,'html');
+    var jqXHR =
+        $.get(
+            url,
+            null,
+            function(response){
+                console.log("Callback getBody...");
+                validateSession(response);
+            },
+            'html'
+        );
     $.xhrPool.push(jqXHR);
     return jqXHR;
 }
@@ -176,7 +235,7 @@ function getBody(url){
  * @param data
  */
 function validateSession(data){
-    if (data.message != undefined && data.message == 'logout'){
+    if (data != null && data.message != null && data.message == 'logout'){
         // setMesageCode(MSG_LOGIN_ERROR);
         // printMessage(getMessageCode());
         window.location.href = getRoute() + '/login.html';
