@@ -18,7 +18,7 @@
                     "<div class='col-lg-3 col-xs-6'>" +
                         "<div class='small-box bg-"+data.data[i].color+"'>" +
                             "<div class='inner'>" +
-                                "<h3 id='nivel_"+data.data[i].nombre.toLowerCase()+"_cantidad'>-</h3>" +
+                                "<h3 id='nivel_"+data.data[i].id+"'><i class='fa fa-refresh fa-spin'></i></h3>" +
                                 "<p>"+data.data[i].nombre+"</p>" +
                             "</div>" +
                             "<div class='icon'>" +
@@ -27,6 +27,23 @@
                             "<a id='consultar-nivel-1' href='javascript:void(0);' class='small-box-footer'>Ver listado <i class='fa fa-arrow-circle-right'></i></a>" +
                         "</div>" +
                     "</div>");
+                $.ajax({
+                    url: R_NIVEL_INDEX + '/count/personas/PRU-1986/index.json',
+                    type: 'GET',
+                    dataType: 'json',
+                    headers: {
+                        'id': data.data[i].id
+                    },
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        console.log(data);
+                        var idCantidadPersonas = "nivel_"+data.data[0];
+                        $('#'+idCantidadPersonas).html(data.data[1]);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
             }
 
         },
