@@ -52,6 +52,10 @@
         $("#btn-registrar").on('click', function(){
             loadModule('ganados','ganados','Index');
         });
+        
+        $("#btn-iglesias").on('click', function(){
+            loadModule('iglesias','iglesias','Index');
+        });
     }
     
 })();
