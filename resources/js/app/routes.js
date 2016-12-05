@@ -22,7 +22,8 @@ ROUTE = {
     MODULES: {
         GANADOS: module + web + ENV + '/persona/',
         GANADOS_NEW: module + web + ENV + '/persona/new',
-        GENERAL: module + web + ENV + '/general/valorvariable'
+        GENERAL: module + web + ENV + '/general/valorvariable',
+        IGLESIA: module + web + ENV + '/iglesia/'
     }
 };
 var R_PERSONA_COUNT = module + web + ENV + '/persona/count';

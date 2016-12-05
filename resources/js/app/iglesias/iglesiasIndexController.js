@@ -1,13 +1,13 @@
 (function() {
     'use strict';
 
-    APP.setTitle('Familias Conectadas ');
+    APP.setTitle('Iglesias Registradas ');
     APP.setTitleDescription('');
-    var codeStorage = 'ganados-familia-index';
+    var codeStorage = 'iglesias-index';
     var tablaActual = null;
     var data = null;
     try{
-        tablaActual = $("#ganados-main-table").DataTable({
+        tablaActual = $("#iglesias-main-table").DataTable({
         "paging": false,
         "lengthChange": false,
         "searching": false,
@@ -18,29 +18,13 @@
         });
     }
     catch (e){
-        console.log("Error [Ganados/Index/Controller]:", e.message);
+        console.log("Error [Iglesias/Index/Controller]:", e.message);
     }
 
-
-    /**
-     *
-     * @param timestamp
-     * @returns {string}
-     */
-    function getFecha(timestamp){
-        var a = new Date(timestamp * 1000);
-        var months = ['Ene','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        var year = a.getFullYear();
-        var month = "0" + a.getMonth();
-        var date = "0" + a.getDate();
-
-        var time = date.substr(-2) + '/' + month.substr(-2) + '/' + year;
-        return time;
-    }
 
     data = $.parseJSON(APP.storage.get(codeStorage));
     if (data == null){
-        getList(R_FAMILIA_INDEX + '/PRU-1986/index.json')
+        getList(ROUTE.MODULES.IGLESIA + getIdEntidad())
             .done(function(response) {
                 if (response != null){
                     llenarTabla(response);
@@ -57,8 +41,8 @@
         $( "#table-loader" ).remove();
     }
 
-    $("#btn-registrar-familia").on('click', function(){
-        loadModule('ganados','ganados','Nuevo');
+    $("#btn-registrar-iglesia").on('click', function(){
+        loadModule('iglesias','iglesias','Nuevo');
     });
 
     function llenarTabla(values){
@@ -67,13 +51,10 @@
             if (tablaActual != null){
                 tablaActual.row.add( [
                     (i+1),
-                    '<input type="checkbox" id="familia-' + item.id + '">',
-                    '<a id="familia_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'ganados\',\'ganados\',\'Nuevo\',' + item.id + ');">' + item.nombre + '</a>',
-                    item.integrantes,
-                    // item.telefono,
-                    // item.correo,
-                    // item.metodoGanar.nombre,
-                    // getFecha(item.fechaGanado.timestamp)
+                    '<input type="checkbox" id="iglesia-' + item.id + '">',
+                    '<a id="iglesia_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'iglesias\',\'iglesias\',\'Nuevo\',' + item.id + ');">' + item.nombre + '</a>',
+                    item.pais.nombre,
+                    item.idEstatus.nombre
                 ] ).draw( false );
             }
         });

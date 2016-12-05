@@ -250,6 +250,27 @@ function getBody(url){
     return jqXHR;
 }
 
+/**
+ * Consulta HTML de datos desde el backend
+ * @param url
+ * @returns {*}
+ */
+function postBody(url, params){
+    $(document).ajaxStart(function() { Pace.restart(); });
+    var jqXHR =
+        $.post(
+            url,
+            params,
+            function(response){
+                console.log("Callback postBody...");
+                APP.validate(response);
+            },
+            'html'
+        );
+    $.xhrPool.push(jqXHR);
+    return jqXHR;
+}
+
 JSON.stringify = JSON.stringify || function (obj) {
         var t = typeof (obj);
         if (t != "object" || obj === null) {
