@@ -23,15 +23,19 @@
     // }
     
     if (getIdEntidad() == 0){
+        console.log("GetIdentidad = 0");
         data = APP.storage.get(codeSessionStorage);
     }
     else{
+        console.log("GetIdentidad = " + getIdEntidad());
         APP.storage.remove(codeSessionStorage);
     }
 
     if (data == null){
+        console.log("Ruta del POST 1: " + ROUTE.MODULES.IGLESIA + getIdEntidad());
         postBody(ROUTE.MODULES.IGLESIA + getIdEntidad(), null)
         .done(function(response) {
+            console.log("Done...");
             response = $.parseJSON(response);
             if(response != null){
                 cargarFormulario((response.data));
@@ -54,6 +58,7 @@
     function cargarFormulario(valores, guardarStorage){
         try{
             if (valores != null){
+                console.log("Cargar Formulario != null");
                 $('#form-iglesias').html(valores);
                 valores = $('#form-iglesias').html();
                 APP.storage.set(codeSessionStorage, valores + '');
@@ -122,11 +127,14 @@
                 APP.storage.remove('iglesias-index');
                 APP.storage.remove('iglesias-nuevo');
                 $('#form-iglesias').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+                console.log("Ruta post 2:", ROUTE.MODULES.IGLESIA + getIdEntidad());
+                console.log("Data post 2:", $('form[name=iglesia]').serialize());
                 var jqxhr = $.post(
                     ROUTE.MODULES.IGLESIA + getIdEntidad()
                     , $('form[name=iglesia]').serialize()
                     , function(response) {
                         // response = $.parseJSON(response);
+                        console.log("Response: ", response);
                         if(response != null){
                             APP.validate(response);
                             cargarFormulario($.parseHTML(response.data), false);
