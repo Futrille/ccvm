@@ -301,7 +301,19 @@ JSON.stringify = JSON.stringify || function (obj) {
     };
 
 
+function getChecked(name, simboloSeparacion, modo){
+    var resultado = null;
+    var simboloSeparacion = simboloSeparacion == null ? '-' : simboloSeparacion;
+    var ids = [];
+    $('input[name=' + name + ']:checked').each(function(a,b){
+        var id = $(b).attr('id').split(simboloSeparacion)[1];
+        id = parseInt(id);
+        ids.push(id);
+    });
 
+    resultado = modo == 'string' ? ids.join(',') : ids;
+    return resultado;
+}
 
 
 

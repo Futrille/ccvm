@@ -55,8 +55,8 @@
             if (tablaActual != null){
                 tablaActual.row.add( [
                     (i+1),
-                    '<input type="checkbox" id="iglesia-' + item.id + '">',
-                    '<a id="iglesia_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'iglesias\',\'iglesias\',\'Nuevo\',' + item.id + ');">' + item.nombre + '</a>',
+                    '<input type="checkbox" id="igl-' + item.id + '" name="igl_ids" onclick="">',
+                    '<a id="iglesia_' + item.id + '" href="javascript:loadModule(\'iglesias\',\'iglesias\',\'Nuevo\',' + item.id + ');">' + item.nombre + '</a>',
                     item.pais.nombre,
                     item.idEstatus.nombre
                 ] ).draw( false );
@@ -67,4 +67,25 @@
     $('#mi-modal').on('shown.bs.modal', function () {
         // $('#myInput').focus()
     })
+
+    $('#eliminar-registro').on('click', function () {
+        var idsEliminar = getChecked('igl_ids', '-','string');
+        $.ajax({
+            url: ROUTE.MODULES.IGLESIA + APP.getIdEntidad(),
+            type: 'DELETE',
+            // success: callback,
+            data: { ids: idsEliminar},
+            contentType: 'json'
+        })
+            .done(function(response) {
+                console.log(response);
+                // loadModule('iglesias','iglesias','Index');
+            })
+            .fail(function(dataFail) {
+            })
+            .always(function() {
+
+            });
+    })
+
 })();
