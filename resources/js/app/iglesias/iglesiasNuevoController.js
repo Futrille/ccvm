@@ -22,18 +22,18 @@
     //     console.log("Error [Ganados/Nuevo/Controller]:", e.message);
     // }
     
-    if (getIdEntidad() == 0){
-        console.log("GetIdentidad = 0");
+    if (APP.getIdEntidad() == 0){
+        console.log("APP.getIdEntidad = 0");
         data = APP.storage.get(codeSessionStorage);
     }
     else{
-        console.log("GetIdentidad = " + getIdEntidad());
+        console.log("APP.getIdEntidad = " + APP.getIdEntidad());
         APP.storage.remove(codeSessionStorage);
     }
 
     if (data == null){
-        console.log("Ruta del POST 1: " + ROUTE.MODULES.IGLESIA + getIdEntidad());
-        postBody(ROUTE.MODULES.IGLESIA + getIdEntidad(), null)
+        console.log("Ruta del POST 1: " + ROUTE.MODULES.IGLESIA + APP.getIdEntidad());
+        postBody(ROUTE.MODULES.IGLESIA + APP.getIdEntidad(), null)
         .done(function(response) {
             console.log("Done...");
             response = $.parseJSON(response);
@@ -117,8 +117,8 @@
     function iniciarEventos(){
         try {
             $('#btn-iglesias-cancelar').click(function () {
-                setIdEntidad(0);
-                setMesageCode(MSG_NO_MESSAGE);
+                APP.setIdEntidad(0);
+                APP.msg.setMesageCode(APP.msg.MSG_NO_MESSAGE);
                 loadModule('iglesias', 'iglesias', 'Index');
             });
 
@@ -127,23 +127,18 @@
                 APP.storage.remove('iglesias-index');
                 APP.storage.remove('iglesias-nuevo');
                 $('#form-iglesias').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
-                console.log("Ruta post 2:", ROUTE.MODULES.IGLESIA + getIdEntidad());
-                console.log("Data post 2:", $('form[name=iglesia]').serialize());
                 var jqxhr = $.post(
-                    ROUTE.MODULES.IGLESIA + getIdEntidad()
+                    ROUTE.MODULES.IGLESIA + APP.getIdEntidad()
                     , $('form[name=iglesia]').serialize()
                     , function(response) {
                         // response = $.parseJSON(response);
                         console.log("Response: ", response);
-                        if(response != null){
+                        if(response != null && response.status == 0 && response.message != null){
                             APP.validate(response);
-                            cargarFormulario($.parseHTML(response.data), false);
+                            APP.msg.setMesageCode(APP.msg.MSG_SAVE_SUCCESS);
+                            loadModule('iglesias', 'iglesias', 'Index');
+                            // cargarFormulario($.parseHTML(response.data), false);
                         }
-                })
-                .done(function() {
-                })
-                .fail(function() {
-                    $('#table-loader').remove();
                 })
                 .always(function() {
                     $('#table-loader').remove();

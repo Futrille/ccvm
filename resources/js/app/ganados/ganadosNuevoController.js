@@ -22,7 +22,7 @@
         console.log("Error [Ganados/Nuevo/Controller]:", e.message);
     }
     
-    if (getIdEntidad() == 0){
+    if (APP.getIdEntidad() == 0){
         data = APP.storage.get(codeSessionStorage);
     }
     else{
@@ -30,7 +30,7 @@
     }
 
     if (data == null){
-        getBody(getRoute('persona_new', getIdEntidad()))
+        getBody(getRoute('persona_new', APP.getIdEntidad()))
         .done(function(response) {
             response = $.parseJSON(response);
             if(response != null){
@@ -112,8 +112,8 @@
     function iniciarEventos(){
         try {
             $('#btn-ganados-registrar-cancelar').click(function () {
-                setIdEntidad(0);
-                setMesageCode(MSG_NO_MESSAGE);
+                APP.setIdEntidad(0);
+                APP.msg.setMesageCode(APP.msg.MSG_NO_MESSAGE);
                 loadModule('ganados', 'ganados', 'Index');
             });
 
@@ -128,7 +128,7 @@
                 APP.storage.remove('ganados-familia-nuevo');
                 $('#form-ganados').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
                 var jqxhr = $.post(
-                    getRoute('persona_new', getIdEntidad())
+                    getRoute('persona_new', APP.getIdEntidad())
                     , ( $('form[name=persona]') != null ? $('form[name=persona]').serialize() + '&' : '' ) + $('form[name=familia]').serialize()
                     , function(response) {
                         // response = $.parseJSON(response);
@@ -142,7 +142,7 @@
                     //     // printMessage(getMessageCode());
                     // }
                     // else {//if (data != null && data.status != null && data.status == "success"){
-                    //     setIdEntidad(data.response.id);
+                    //     APP.APP.setIdEntidad(data.response.id);
                     //     // setMesageCode(MSG_SAVE_SUCCESS);
                     //     loadModule('ganados','ganados','Index');
                     // }
@@ -164,7 +164,7 @@
                 $('#form-ganados').append('<div id="table-loader" class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
                 console.log("boton guardar ", $('form[name=persona]').serialize());
                 var jqxhr = $.post(
-                    getRoute('persona_new', getIdEntidad())
+                    getRoute('persona_new', APP.getIdEntidad())
                     , $('form[name=familia]').serialize()
                     , function(response) {
                         // response = $.parseJSON(response);
@@ -177,7 +177,7 @@
                     //     // printMessage(getMessageCode());
                     // }
                     // else {//if (data != null && data.status != null && data.status == "success"){
-                    //     setIdEntidad(data.response.id);
+                    //     APP.APP.setIdEntidad(data.response.id);
                     //     // setMesageCode(MSG_SAVE_SUCCESS);
                     //     loadModule('ganados','ganados','Index');
                     // }

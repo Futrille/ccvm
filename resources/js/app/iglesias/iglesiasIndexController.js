@@ -1,11 +1,13 @@
 (function() {
     'use strict';
 
-    APP.setTitle('Iglesias Registradas ');
+    APP.setTitle('Iglesias');
     APP.setTitleDescription('');
     var codeStorage = 'iglesias-index';
     var tablaActual = null;
     var data = null;
+
+    APP.msg.printMessage(APP.msg.getMessageCode());
     try{
         tablaActual = $("#iglesias-main-table").DataTable({
         "paging": false,
@@ -24,9 +26,10 @@
 
     data = $.parseJSON(APP.storage.get(codeStorage));
     if (data == null){
-        getList(ROUTE.MODULES.IGLESIA + getIdEntidad())
+        getList(ROUTE.MODULES.IGLESIA + APP.getIdEntidad())
             .done(function(response) {
                 if (response != null){
+                    console.log("debug 3");
                     llenarTabla(response);
                 }
             })
@@ -37,6 +40,7 @@
             });
     }
     else{
+        console.log("debug 4");
         llenarTabla(data);
         $( "#table-loader" ).remove();
     }

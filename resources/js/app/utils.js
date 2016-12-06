@@ -7,9 +7,18 @@ var APP = {
     , TITLE_DESCRIPTION: ''
 
     //Globals
-    , idEntidad : 0
     , useStorage: true
     , storage: new AppStorage()
+
+    , msg: new Message()
+    
+    , idEntidad : 0
+    , getIdEntidad: function(){
+        return this.idEntidad;
+    }
+    , setIdEntidad: function(id){
+        return this.idEntidad = id;
+    }
 
     , validate: function(data){
         if (data != null && data.message != null && data.message == 'logout'){
@@ -148,10 +157,10 @@ function loadModule(modulo, vista, accion, id, messageCode){
         $.xhrPool.abortAll();
 
         if (id != undefined && id != null && id > 0) {
-            setIdEntidad(id);
+            APP.setIdEntidad(id);
         }
         else{
-            setIdEntidad(0);
+            APP.setIdEntidad(0);
         }
 
         var wrapper = $("#page-wrapper");
@@ -178,13 +187,13 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 });
                 break;
             case 'Editar':
-                wrapper.load(getRoute('persona_edit', getIdEntidad()), {
+                wrapper.load(getRoute('persona_edit', APP.getIdEntidad()), {
                     "apiKey": "77fa53ff60e8f41e40260b0dad826d76",
                     //"id":id
                 }, function (response, status, xhr) {
                     $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                         console.log("Script cargado Editar: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
-                        printMessage(getMessageCode());
+                        APP.msg.printMessage(APP.msg.getMessageCode());
                     });
                 });
                 break;
@@ -194,7 +203,7 @@ function loadModule(modulo, vista, accion, id, messageCode){
                 }, function (response, status, xhr) {
                     $.cachedScript("resources/js/app/" + modulo + "/" + vista + accion + "Controller.js").done(function (script, textStatus) {
                         console.log("Script cargado: " + "resources/js/app/" + modulo + "/" + vista + accion + "Controller.js");
-                        printMessage(getMessageCode());
+                        APP.msg.printMessage(APP.msg.getMessageCode());
                         // $.loader('close');
                     });
                 });
