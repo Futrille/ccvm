@@ -52,10 +52,14 @@
                 tablaActual.row.add( [
                     (i+1),
                     '<input type="checkbox" id="iglesia-' + item.id + '">',
-                    '<a id="iglesia_' + item.id + '" name="lista_editar" href="javascript:loadModule(\'iglesias\',\'iglesias\',\'Nuevo\',' + item.id + ');">' + item.nombre + '</a>',
+                    '<a id="iglesia_' + item.id + '" name="lista_editar" href="#">' + item.nombre + '</a>',
                     item.pais.nombre,
                     item.idEstatus.nombre
                 ] ).draw( false );
+                $('a[name=lista_editar]').on('click', function(){
+                    console.log("se hizo click", $(this));
+                    // javascript:loadModule(\'iglesias\',\'iglesias\',\'Nuevo\',' + item.id + ')
+                });
             }
         });
     }
