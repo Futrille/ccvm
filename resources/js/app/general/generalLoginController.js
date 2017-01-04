@@ -21,7 +21,7 @@
                 // printMessage(getMessageCode());
             }
             //else {//if (data != null && data.status != null && data.status == "success"){
-            //setIdEntidad(data.response.id);
+            //APP.APP.setIdEntidad(data.response.id);
             //setMesageCode(MSG_SAVE_SUCCESS);
             //loadModule('ganados','ganados','Index');
             //}
